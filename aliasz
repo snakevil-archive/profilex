@@ -1,0 +1,66 @@
+# ~/.aliasz
+#
+# Common public aliases for Bourne compatible shells.
+#
+# http://dev.snakevil.be/profiles/aliasz
+#
+# AUTHOR         Snakevil Zen <zsnakevil at gmail dot com>
+# VERSION        1.0.0
+# COPYRIGHT      (c) 2010 Snakevil.be/HERE
+
+# Colorizes.
+[ -n "${Buname}" ] && case `uname -s` in
+  Linux )
+    platform="linux"
+    ;;
+  *[Bb][Ss][Dd] )
+    platform="bsd"
+    ;;
+  * )
+    platform="unknown"
+    ;;
+esac
+[ -n "${Bgrep}" -a -n "${Bwc}" ] \
+  && [ 0 -lt `ls --version | grep GNU | wc -l` ] \
+  && platform="linux"
+if [ "bsd" = "${platform}" ]; then
+  alias ls='ls -FG'
+elif [ "linux" = "${platform}" ]; then
+  if [ "cygwin" = "${TERM}" ]; then
+    alias ls='ls -F --color=auto --show-control-chars'
+  else
+    alias ls='ls -F --color=auto'
+  fi
+fi
+unset platform
+alias ll='ls -hl'
+alias la='ll -A'
+
+# Ensures files removing and overwriting.
+alias cp='cp -ai'
+alias mv='mv -i'
+alias rm='rm -i'
+
+# Improves operating efficiency.
+alias df='df -Th'
+alias free='free -m'
+alias mkdir='mkdir -p'
+alias more='less'
+alias ps='ps afux'
+
+# Shortcuts to frequent operations.
+alias hg='history | grep'
+alias j='jobs'
+alias md='mkdir'
+alias v='vim'
+sudo -V > /dev/null 2>&1 && alias su='sudo -i'
+USERx=$USER
+[ -z "${SUDO_USER}" ] || USERx=$SUDO_USER
+GROUPx=`id -gn "${USERx}"`
+alias own="chown -cRh ${USERx}:${GROUPx}"
+unset USERx
+unset GROUPx
+
+
+# vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
+# vim:tw=75:ts=2:sts=2:et:si:ai:sw=2

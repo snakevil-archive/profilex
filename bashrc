@@ -5,7 +5,7 @@
 # http://dev.snakevil.be/profiles/bashrc
 #
 # AUTHOR         Snakevil Zen <zsnakevil at gmail dot com>
-# VERSION        1.0.0
+# VERSION        1.1.0
 # COPYRIGHT      (c) 2010 Snakevil.be/HERE
 
 # Defines attributes in ANSI colors.
@@ -240,6 +240,9 @@ elif [ -f "/usr/etc/bash_completion" ]; then
 elif [ -f "/etc/bash_completion" ]; then
   . "/etc/bash_completion"
 fi
+
+# Includes common aliases.
+[ -f "${HOME}/.aliasz" ] && . "${HOME}/.aliasz"
 
 # vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
 # vim:tw=75:ts=2:sts=2:et:si:ai:sw=2

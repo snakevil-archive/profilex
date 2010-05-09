@@ -6,7 +6,7 @@
 # http://dev.snakevil.be/profiles/profile
 #
 # AUTHOR         Snakevil Zen <zsnakevil at gmail dot com>
-# VERSION        1.0.0
+# VERSION        1.1.0
 # COPYRIGHT      (c) 2010 Snakevil.be/HERE
 
 # Skipped for non-interactive shells.
@@ -93,9 +93,6 @@ case "${SNAKEVIL_SHELL}" in
 esac
 export ENV
 [ -f "${ENV}" ] && . "${ENV}"
-
-# Includes common aliases.
-[ -f "${HOME}/.aliasz" ] && . "${HOME}/.aliasz"
 
 # Reclaims temporary variables.
 unset PATHx

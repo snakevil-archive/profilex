@@ -1,17 +1,16 @@
 # ~/.bash_profile
 #
-# Personal .bash_profile file for Bourne Again shells (bash(1)).
-#
 # http://dev.snakevil.be/profiles/bash_profile
 #
-# AUTHOR         Snakevil Zen <zsnakevil at gmail dot com>
-# VERSION        1.0.0
-# COPYRIGHT      (c) 2010 Snakevil.be/HERE
+# AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
+# VERSION    1.1.0
+# COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
-# Supports bash only.
 [ -z "${BASH}" ] && return
 
-# Uniform initializes user environment.
+SNAKEVIL_SHTYPE="bash"
+export SNAKEVIL_SHTYPE
+
 [ -f "${HOME}/.profile" ] && source "${HOME}/.profile"
 
 # vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4

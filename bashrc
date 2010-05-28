@@ -1,118 +1,13 @@
 # ~/.bashrc
 #
-# Personal .bashrc file for interactive Bourne Again shells (bash(1)).
-#
 # http://dev.snakevil.be/profiles/bashrc
 #
-# AUTHOR         Snakevil Zen <zsnakevil at gmail dot com>
-# VERSION        1.1.0
-# COPYRIGHT      (c) 2010 Snakevil.be/HERE
+# AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
+# VERSION    1.2.0
+# COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
-# Defines attributes in ANSI colors.
-COLOR_ATTRIBUTE_RESET='\e[0m'
-CANormal=$COLOR_ATTRIBUTE_RESET
-CAReset=$COLOR_ATTRIBUTE_RESET
-COLOR_ATTRIBUTE_BOLD='\e[1m'
-CABold=$COLOR_ATTRIBUTE_BOLD
-CABright=$COLOR_ATTRIBUTE_BOLD
-CAHigh=$COLOR_ATTRIBUTE_BOLD
-CAHighlight=$COLOR_ATTRIBUTE_BOLD
-COLOR_ATTRIBUTE_ITALIC='\e[3m'
-CAItalic=$COLOR_ATTRIBUTE_ITALIC
-CAItalics=$COLOR_ATTRIBUTE_ITALIC
-COLOR_ATTRIBUTE_UNDERLINE='\e[4m'
-CAUnder=$COLOR_ATTRIBUTE_UNDERLINE
-CAUnderline=$COLOR_ATTRIBUTE_UNDERLINE
-COLOR_ATTRIBUTE_BLINK='\e[5m'
-CABlink=$COLOR_ATTRIBUTE_BLINK
-COLOR_ATTRIBUTE_REVERSE='\e[7m'
-CAInverse=$COLOR_ATTRIBUTE_REVERSE
-CAReverse=$COLOR_ATTRIBUTE_REVERSE
-COLOR_ATTRIBUTE_CONCEAL='\e[8m'
-CAConceal=$COLOR_ATTRIBUTE_CONCEAL
-CAInvisible=$COLOR_ATTRIBUTE_CONCEAL
-COLOR_ATTRIBUTE_DELETED='\e[9m'
-CADeleted=$COLOR_ATTRIBUTE_DELETED
-CAThrough=$COLOR_ATTRIBUTE_DELETED
+[ -f "${HOME}/.myshrc" ] && source "${HOME}/.myshrc"
 
-# Defines text colors in ANSI colors.
-COLOR_TEXT_BLACK='\e[30m'
-CFBlack=$COLOR_TEXT_BLACK
-CTBlack=$COLOR_TEXT_BLACK
-COLOR_TEXT_RED='\e[31m'
-CFRed=$COLOR_TEXT_RED
-CTRed=$COLOR_TEXT_RED
-COLOR_TEXT_GREEN='\e[32m'
-CFGreen=$COLOR_TEXT_GREEN
-CTGreen=$COLOR_TEXT_GREEN
-COLOR_TEXT_YELLOW='\e[33m'
-CFYellow=$COLOR_TEXT_YELLOW
-CTYellow=$COLOR_TEXT_YELLOW
-COLOR_TEXT_BLUE='\e[34m'
-CFBlue=$COLOR_TEXT_BLUE
-CTBlue=$COLOR_TEXT_BLUE
-COLOR_TEXT_MAGENTA='\e[35m'
-CFMagenta=$COLOR_TEXT_MAGENTA
-CTMagenta=$COLOR_TEXT_MAGENTA
-COLOR_TEXT_CYAN='\e[36m'
-CFCyan=$COLOR_TEXT_CYAN
-CTCyan=$COLOR_TEXT_CYAN
-COLOR_TEXT_WHITE='\e[37m'
-CFWhite=$COLOR_TEXT_WHITE
-CTWhite=$COLOR_TEXT_WHITE
-COLOR_TEXT_DEFFAULT='\e[39m'
-CFDefault=$COLOR_TEXT_DEFFAULT
-CTDefault=$COLOR_TEXT_DEFFAULT
-
-# Defines background colors in ANSI colors.
-COLOR_BACKGROUND_BLACK='\e[40m'
-CBBlack=$COLOR_BACKGROUND_BLACK
-COLOR_BACKGROUND_RED='\e[41m'
-CBRed=$COLOR_BACKGROUND_RED
-COLOR_BACKGROUND_GREEN='\e[42m'
-CBGreen=$COLOR_BACKGROUND_GREEN
-COLOR_BACKGROUND_YELLOW='\e[43m'
-CBYellow=$COLOR_BACKGROUND_YELLOW
-COLOR_BACKGROUND_BLUE='\e[44m'
-CBBlue=$COLOR_BACKGROUND_BLUE
-COLOR_BACKGROUND_MAGENTA='\e[45m'
-CBMagenta=$COLOR_BACKGROUND_MAGENTA
-COLOR_BACKGROUND_CYAN='\e[46m'
-CBCyan=$COLOR_BACKGROUND_CYAN
-COLOR_BACKGROUND_WHITE='\e[47m'
-CBWhite=$COLOR_BACKGROUND_WHITE
-COLOR_BACKGROUND_DEFFAULT='\e[49m'
-CBDefault=$COLOR_BACKGROUND_DEFFAULT
-
-# Defines shortcut colors for quick-usings.
-CAqua=$CAHigh$CTCyan
-CBlack=$CAReset$CTBlack
-CBlink=$CABlink
-CBlue=$CAHigh$CTBlue
-CDef=$CTDefault
-CDefault=$CTDefault
-CFuchsia=$CAHigh$CTMagenta
-CGray=$CAHigh$CTBlack
-CGreen=$CAReset$CTGreen
-CHigh=$CAHigh
-CInvisible=$CAInvisible
-CItalic=$CAItalic
-CLime=$CAHigh$CTGreen
-CMaroon=$CAReset$CTRed
-CNavy=$CAReset$CTBlue
-CNone=$CAReset
-COlive=$CAReset$CTYellow
-CPurple=$CAReset$CTMagenta
-CRed=$CAHigh$CTRed
-CReverse=$CAReverse
-CSilver=$CAReset$CTWhite
-CTeal=$CAReset$CTCyan
-CThrough=$CAThrough
-CUnder=$CAUnder
-CWhite=$CAHigh$CTWhite
-CYellow=$CAHigh$CTYellow
-
-# Provides essential functions.
 SNAKEVIL_RETRIEVE_LOAD() {
   [ "?.??" = "${SNAKEVIL_LOAD}" ] && return
   export SNAKEVIL_LOAD=`uptime \
@@ -227,10 +122,6 @@ SNAKEVIL_UPDATE_PS1() {
   unset _ce
 }
 
-# Sets personal PROMPT.
-export PROMPT_COMMAND='SNAKEVIL_UPDATE_PS1'
-
-# Loads bash-completion
 if [ -f "/opt/local/etc/bash_completion" ]; then
   . "/opt/local/etc/bash_completion"
 elif [ -f "/usr/local/etc/bash_completion" ]; then
@@ -241,8 +132,9 @@ elif [ -f "/etc/bash_completion" ]; then
   . "/etc/bash_completion"
 fi
 
-# Includes common aliases.
 [ -f "${HOME}/.aliasz" ] && . "${HOME}/.aliasz"
+
+export PROMPT_COMMAND='SNAKEVIL_UPDATE_PS1'
 
 # vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
 # vim:tw=75:ts=2:sts=2:et:si:ai:sw=2

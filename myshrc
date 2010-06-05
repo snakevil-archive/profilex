@@ -30,16 +30,23 @@ export INPUTRC="${HOME}/.inputrc"
 export EDITOR="vim"
 export PAGER="less"
 
-[ -r "${HOME}/.dircolors" ] \
-  && dircolors --version > /dev/null 2>&1 \
-  && eval `dircolors -b "${HOME}/.dircolors"` \
-  || eval `dircolors -b`
+if dircolors --version > /dev/null 2>&1; then
+  if [ -r "${HOME}/.dircolors" ]; then
+    eval `dircolors -b "${HOME}/.dircolors"`
+  else
+    eval `dircolors -b`
+  fi
+fi
 
-[ -x "/usr/share/source-highlight/src-hilite-lesspipe.sh" ] \
-  && {
-    export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+LESSOPENx="/share/source-highlight/src-hilite-lesspipe.sh"
+if [ -x "/usr${LESSOPENx}" ]; then
+    export LESSOPEN="| /usr${LESSOPENx} %s"
     export LESS=' -R '
-  }
+elif [ -x "/opt/local${LESSOPENx}" ]; then
+    export LESSOPEN="| /opt/local${LESSOPENx} %s"
+    export LESS=' -R '
+fi
+unset LESSOPENx
 
 SNAKEVIL_IP="127.0.0.1"
 ifconfig > /dev/null 2>&1 \

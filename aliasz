@@ -3,7 +3,7 @@
 # http://dev.snakevil.be/profiles/aliasz
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.1.0
+# VERSION    1.1.1
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 if [ -n "${LS_COLORS}" ]; then
@@ -47,10 +47,12 @@ alias mkdir='mkdir -p'
 alias more='less'
 alias ps='ps afux'
 
+alias g='git'
 alias hg='history | grep'
 alias j='jobs'
 alias md='mkdir'
-alias v='vim'
+vim --version > /dev/null 2>&1 && alias vi='vim'
+alias v='vi'
 sudo -V > /dev/null 2>&1 && alias su='sudo -s'
 
 USERx=$USER

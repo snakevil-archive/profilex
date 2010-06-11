@@ -1,9 +1,8 @@
 # ~/.aliasz
 #
-# http://dev.snakevil.be/profiles/aliasz
+# http://dev.snakevil.in/profilex/src/profilex/aliasz
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.1.1
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 if [ -n "${LS_COLORS}" ]; then

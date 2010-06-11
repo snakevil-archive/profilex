@@ -1,9 +1,8 @@
 # ~/.profile
 #
-# http://dev.snakevil.be/profiles/profile
+# http://dev.snakevil.in/profilex/src/profilex/profile
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.2.0
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 [ "bash" = "${SNAKEVIL_SHTYPE}" ] || {

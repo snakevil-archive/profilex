@@ -1,9 +1,8 @@
 # ~/.inputrc
 #
-# http://dev.snakevil.be/profiles/inputrc
+# http://dev.snakevil.in/profilex/src/profilex/inputrc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.0.0
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 set bell-style none

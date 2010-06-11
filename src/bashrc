@@ -1,9 +1,8 @@
 # ~/.bashrc
 #
-# http://dev.snakevil.be/profiles/bashrc
+# http://dev.snakevil.in/profilex/src/profilex/bashrc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.2.0
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 [ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"

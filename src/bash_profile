@@ -1,9 +1,8 @@
 # ~/.bash_profile
 #
-# http://dev.snakevil.be/profiles/bash_profile
+# http://dev.snakevil.in/profilex/src/profilex/bash_profile
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.1.0
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 [ -z "${BASH}" ] && return

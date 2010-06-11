@@ -1,9 +1,8 @@
 # ~/.myshrc
 #
-# http://dev.snakevil.be/profiles/myshrc
+# http://dev.snakevil.in/profilex/src/profilex/myshrc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# VERSION    1.0.0
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
 [ -z "${PS1}" ] && return;

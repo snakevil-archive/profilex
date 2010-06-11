@@ -6,7 +6,7 @@
 # VERSION    1.2.0
 # COPYRIGHT  (c) 2010 Snakevil.be/HERE
 
-[ -f "${HOME}/.myshrc" ] && source "${HOME}/.myshrc"
+[ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"
 
 SNAKEVIL_RETRIEVE_LOAD() {
   [ "?.??" = "${SNAKEVIL_LOAD}" ] && return
@@ -132,7 +132,7 @@ elif [ -f "/etc/bash_completion" ]; then
   . "/etc/bash_completion"
 fi
 
-[ -f "${HOME}/.aliasz" ] && . "${HOME}/.aliasz"
+[ -f "${HOME}/.profilex/aliasz" ] && . "${HOME}/.profilex/aliasz"
 
 export PROMPT_COMMAND='SNAKEVIL_UPDATE_PS1'
 

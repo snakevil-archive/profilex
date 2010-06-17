@@ -31,8 +31,8 @@ export EDITOR="vim"
 export PAGER="less"
 
 if dircolors --version > /dev/null 2>&1; then
-  if [ -r "${HOME}/.dircolors" ]; then
-    eval `dircolors -b "${HOME}/.dircolors"`
+  if [ -r "${HOME}/.profilex/dircolors" ]; then
+    eval `dircolors -b "${HOME}/.profilex/dircolors"`
   else
     eval `dircolors -b`
   fi

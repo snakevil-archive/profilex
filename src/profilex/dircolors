@@ -1,9 +1,7 @@
 # ~/.dircolors
 #
-# http://dev.snakevil.in/profilex/src/profilex/dircolors
-#
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  (c) 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2010 Snakevil.be/HERE
 
 TERM con132x25
 TERM con132x30

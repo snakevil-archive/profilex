@@ -1,9 +1,7 @@
 # ~/.aliasz
 #
-# http://dev.snakevil.in/profilex/src/profilex/aliasz
-#
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  (c) 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2010 Snakevil.be/HERE
 
 if [ -n "${LS_COLORS}" ]; then
   case `uname -s` in

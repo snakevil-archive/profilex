@@ -1,9 +1,7 @@
 # ~/.inputrc
 #
-# http://dev.snakevil.in/profilex/src/profilex/inputrc
-#
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  (c) 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2010 Snakevil.be/HERE
 
 set bell-style none
 #set bind-tty-special-chars off

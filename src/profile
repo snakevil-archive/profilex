@@ -1,9 +1,7 @@
 # ~/.profile
 #
-# http://dev.snakevil.in/profilex/src/profilex/profile
-#
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  (c) 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2010 Snakevil.be/HERE
 
 [ "bash" = "${SNAKEVIL_SHTYPE}" ] || {
   SNAKEVIL_SHTYPE=`ps | grep $$ | awk '{print $4}'`

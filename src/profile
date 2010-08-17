@@ -3,6 +3,15 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2010 Snakevil.be/HERE
 
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+which which > /dev/null 2>&1 || return
+
+if which awk grep ps > /dev/null
+then
+  SNAKEVIL_SHTYPE="sh"
+fi
+
 [ "bash" = "${SNAKEVIL_SHTYPE}" ] || {
   SNAKEVIL_SHTYPE=`ps | grep $$ | awk '{print $4}'`
   [ "sh" = "${SNAKEVIL_SHTYPE}" -a -n "${KSH_VERSION}" ] && \
@@ -35,10 +44,6 @@ if [ -f "${ENV}" ]; then
 else
   unset ENV
 fi
-
-# Gathers host ip.
-
-# Gathers current load.
 
 # vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
 # vim:tw=75:ts=2:sts=2:et:si:ai:sw=2

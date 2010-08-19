@@ -38,27 +38,20 @@ CHR     33 # Character devices
 EXEC    01;32 # Executable files
 
 .bash_history       01;30 # Misc files
-.bash_logout        01;30
 .CFUserTextEncoding 01;30
 .DS_Store           01;30
-.gitconfig          01;30
-.gitignore          01;30
 .lesshst            01;30
+.mysql_history      01;30
 .pearrc             01;30
 .sqlite_history     01;30
 .viminfo            01;30
-.vimrc              01;30
 .Xauthority         01;30
 
 .aliasx       01;04;30 # Profiles files
-.aliasz       01;04;30
 .bash_profile 01;04;30
 .bashrc       01;04;30
 .cshrc        01;04;30
-.dircolors    01;04;30
-.inputrc      01;04;30
 .kshrc        01;04;30
-.myshrc       01;04;30
 .profile      01;04;30
 .shrc         01;04;30
 .zshrc        01;04;30
@@ -83,10 +76,37 @@ EXEC    01;32 # Executable files
 .z    01;31
 .zip  01;31
 
-.dmg  04;31 # Image files
-.iso  04;31
-.mou  04;31
-.tar  04;31
+.b5t  01;04;31 # Image files
+.bwt  01;04;31
+.ccd  01;04;31
+.cdi  01;04;31
+.cue  01;04;31
+.dmg  01;04;31
+.iso  01;04;31
+.isz  01;04;31
+.mds  01;04;31
+.mou  01;04;31
+.nrg  01;04;31
+.pdi  01;04;31
+.tar  01;04;31
+.wim  01;04;31
+
+.cfg       33 # Configuration files
+.cnf       33
+.cnf-dist  33
+.cnf.dist  33
+.conf      33
+.conf-dist 33
+.conf.dist 33
+.gitconfig 33
+.gitignore 33
+.local     33
+.inf       33
+.ini       33
+.ini-dist  33
+.ini.dist  33
+.rc        33
+.vimrc     33
 
 .ai   01;35 # Graphical files
 .bmp  01;35

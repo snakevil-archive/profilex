@@ -3,6 +3,8 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2010 Snakevil.be/HERE
 
+[ "-bash" = "$0" ] || return
+
 [ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"
 
 SNAKEVIL_RETRIEVE_LOAD() {

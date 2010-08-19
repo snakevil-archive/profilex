@@ -3,7 +3,11 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2010 Snakevil.be/HERE
 
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+PATH="/opt/local/sbin:/opt/local/bin"
+PATH="${PATH}:/opt/sbin:/opt/bin"
+PATH="${PATH}:/usr/local/sbin:/usr/local/bin"
+PATH="${PATH}:/usr/sbin:/usr/bin"
+PATH="${PATH}:/sbin:/bin"
 
 which which > /dev/null 2>&1 || return
 

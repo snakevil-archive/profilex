@@ -5,17 +5,16 @@
 
 [ -z "${PS1}" ] && return;
 
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-PATHx="/opt/bin"
-[ -d "${PATHx}" -a -r "${PATHx}" ] && PATH="${PATHx}:${PATH}"
-PATHx="/opt/sbin"
-[ -d "${PATHx}" -a -r "${PATHx}" ] && PATH="${PATHx}:${PATH}"
-PATHx="/opt/local/bin"
-[ -d "${PATHx}" -a -r "${PATHx}" ] && PATH="${PATHx}:${PATH}"
-PATHx="/opt/local/sbin"
-[ -d "${PATHx}" -a -r "${PATHx}" ] && PATH="${PATHx}:${PATH}"
-PATHx="${HOME}/bin"
-[ -d "${PATHx}" -a -r "${PATHx}" ] && PATH="${PATHx}:${PATH}"
+PATH=""
+for PATHx in $HOME "/opt/local" "/opt" "/usr/local" "/usr" ""
+do
+  [ -d "${PATHx}/sbin" -a -r "${PATHx}/sbin" ] && {
+    [ -z "$PATH" ] && PATH="${PATHx}/sbin" || PATH="${PATH}:${PATHx}/sbin"
+  }
+  [ -d "${PATHx}/bin" -a -r "${PATHx}/bin" ] && {
+    [ -z "$PATH" ] && PATH="${PATHx}/bin" || PATH="${PATH}:${PATHx}/bin"
+  }
+done
 unset PATHx
 export PATH
 

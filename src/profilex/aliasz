@@ -3,54 +3,64 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2010 Snakevil.be/HERE
 
-if [ -n "${LS_COLORS}" ]; then
-  case `uname -s` in
-    Linux )
-      platform="linux"
-      ;;
-    *[Bb][Ss][Dd] )
-      platform="bsd"
-      ;;
-    * )
-      platform="unknown"
-      ;;
-  esac
-  [ 0 -lt `ls --version | grep GNU | wc -l` ] \
-    && platform="linux"
-  if [ "bsd" = "${platform}" ]; then
-    alias ls='ls -FG'
-  elif [ "linux" = "${platform}" ]; then
-    if [ "cygwin" = "${TERM}" ]; then
-      alias ls='ls -F --color=auto --show-control-chars'
-    else
-      alias ls='ls -F --color=auto'
-    fi
-  fi
-  unset platform
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
-alias ll='ls -hl'
-alias la='ll -A'
-
 alias cp='cp -ai'
+which df > /dev/null && alias df='df -Th'
+which du > /dev/null && alias du='du -ch --time'
+which egrep > /dev/null && alias egrep='egrep --color=auto'
+which fgrep > /dev/null && alias fgrep='fgrep --color=auto'
+which free > /dev/null && alias free='free -m'
+alias grep='grep --color=auto'
+
+case `uname -s` in
+  Linux )
+    platform="linux"
+    ;;
+  *[Bb][Ss][Dd] )
+    platform="bsd"
+    ;;
+  * )
+    platform="unknown"
+    ;;
+esac
+[ 0 -lt `ls --version | grep GNU | wc -l` ] \
+  && platform="linux"
+if [ "bsd" = "${platform}" ]; then
+  alias ls='ls -FG'
+elif [ "linux" = "${platform}" ]; then
+  if [ "cygwin" = "${TERM}" ]; then
+    alias ls='ls -F --color=auto --show-control-chars'
+  else
+    alias ls='ls -F --color=auto'
+  fi
+fi
+unset platform
+
+alias mkdir='mkdir -p'
 alias mv='mv -i'
+which ps > /dev/null \
+  && alias ps='ps -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args"'
 alias rm='rm -i'
 
-alias df='df -Th'
-alias free='free -m'
-alias mkdir='mkdir -p'
-alias more='less'
-alias ps='ps afux'
 
-alias g='git'
-alias hg='history | grep'
-alias j='jobs'
-alias md='mkdir'
-vim --version > /dev/null 2>&1 && alias vi='vim'
+which colordiff > /dev/null && alias diff='colordiff -u' \
+  || alias diff='diff -u'
+alias more='less'
+which vim > /dev/null && alias vi='vim'
+
+
+COLORSx="echo -e '\e[1m1\e[0m\e[2m2\e[0m\e[3m3\e[0m\e[4m4\e[0m"
+COLORSx="${COLORSx}\e[5m5\e[0m\e[6m6\e[0m\e[7m7\e[0m\e[8m8\e[0m';"
+COLORSx="${COLORSx}echo -e '\e[30m30\e[31m31\e[32m32\e[33m33\e[34m34"
+COLORSx="${COLORSx}\e[35m35\e[36m36\e[37m37\e[39m39\e[0m';"
+COLORSx="${COLORSx}echo -e '\e[40m40\e[41m41\e[42m42\e[43m43\e[44m44"
+COLORSx="${COLORSx}\e[45m45\e[46m46\e[47m47\e[49m49\e[0m'"
+alias ansicolors=$COLORSx
+unset COLORSx
+
+alias la='ll -A'
+alias ll='ls -hl'
+which sudo > /dev/null && alias su='sudo -s'
 alias v='vi'
-sudo -V > /dev/null 2>&1 && alias su='sudo -s'
 
 USERx=$USER
 [ -z "${SUDO_USER}" ] || USERx=$SUDO_USER
@@ -58,6 +68,7 @@ GROUPx=`id -gn "${USERx}"`
 alias own="chown -cRh ${USERx}:${GROUPx}"
 unset USERx
 unset GROUPx
+
 
 [ -f "${HOME}/.aliasx" ] && . "${HOME}/.aliasx"
 

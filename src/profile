@@ -44,7 +44,7 @@ ENV="${HOME}/.${ENV}shrc"
 
 if [ -f "${ENV}" ]; then
   export ENV
-  source "${ENV}"
+  . "${ENV}"
 else
   unset ENV
 fi

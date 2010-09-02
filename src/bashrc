@@ -7,6 +7,12 @@
 
 [ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"
 
+export HISTCONTROL="ignorespace"
+export HISTFILESIZE=198486
+export HISTIGNORE="ls:ll:la:fg"
+export HISTSIZE=2010
+export HISTTIMEFORMAT="%F %T "
+
 SNAKEVIL_RETRIEVE_LOAD() {
   [ "?.??" = "${SNAKEVIL_LOAD}" ] && return
   export SNAKEVIL_LOAD=`uptime \

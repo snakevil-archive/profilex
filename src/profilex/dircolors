@@ -121,6 +121,7 @@ EXEC    01;32 # Executable files
 .xpm  01;35
 
 .avi  04;35 # Multimedia files
+.flv  04;35
 .m4a  04;35
 .m4v  04;35
 .mka  04;35

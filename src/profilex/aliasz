@@ -18,11 +18,14 @@ case `uname -s` in
   *[Bb][Ss][Dd] )
     platform="bsd"
     ;;
+  Darwin )
+    platform="bsd"
+    ;;
   * )
     platform="unknown"
     ;;
 esac
-[ 0 -lt `ls --version | grep GNU | wc -l` ] \
+[ 0 -lt `ls --version 2> /dev/null | grep GNU | wc -l` ] \
   && platform="linux"
 if [ "bsd" = "${platform}" ]; then
   alias ls='ls -FG'

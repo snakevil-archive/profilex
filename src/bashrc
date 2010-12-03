@@ -15,8 +15,9 @@ export HISTTIMEFORMAT="%F %T "
 
 SNAKEVIL_RETRIEVE_LOAD() {
   [ "?.??" = "${SNAKEVIL_LOAD}" ] && return
-  export SNAKEVIL_LOAD=`uptime \
-    | sed -e 's/^.*load average: \([^,]*\),.*$/\1/'`
+  SNAKEVIL_LOAD=`uptime \
+    | awk -F'load average' '{print $2}' | awk '{print $2}'`
+  export SNAKEVIL_LOAD="${SNAKEVIL_LOAD:0:4}"
   return
 }
 
@@ -72,7 +73,7 @@ SNAKEVIL_UPDATE_PS1() {
   esac
   _info="<${_info}${_path}\[${_cs}\]>"
   if [ -n "${COLUMNS}" ]; then
-    local _len=`echo -n "${_title}" | wc -c`
+    local _len=`echo -n "${_title}" | wc -c | awk '{print $1}'`
     _len=`expr "6" "+" "11" + "2" + "${_len}"`
     [ "${_len}" -gt "${COLUMNS}" ] || _info="\d ${_info}"
   fi

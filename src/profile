@@ -3,11 +3,14 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2010 Snakevil.be/HERE
 
-PATH="/opt/local/sbin:/opt/local/bin"
-PATH="${PATH}:/opt/sbin:/opt/bin"
-PATH="${PATH}:/usr/local/sbin:/usr/local/bin"
-PATH="${PATH}:/usr/sbin:/usr/bin"
-PATH="${PATH}:/sbin:/bin"
+PATH='/usr/sbin:/usr/bin:/sbin:/bin'
+[ -d '/usr/local/bin' ] && PATH="/usr/local/bin:${PATH}"
+[ -d '/usr/local/sbin' ] && PATH="/usr/local/sbin:${PATH}"
+[ -d '/opt/bin' ] && PATH="/opt/bin:${PATH}"
+[ -d '/opt/sbin' ] && PATH="/opt/sbin:${PATH}"
+[ -d '/opt/local/bin' ] && PATH="/opt/local/bin:${PATH}"
+[ -d '/opt/local/libexec/gnubin' ] && PATH="/opt/local/libexec/gnubin:${PATH}"
+[ -d '/opt/local/sbin' ] && PATH="/opt/local/sbin:${PATH}"
 
 which which > /dev/null 2>&1 || return
 

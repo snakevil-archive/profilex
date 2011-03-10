@@ -27,15 +27,15 @@ export HISTTIMEFORMAT="%F %T "
 
 # {{{ Enhances shell prompt.
 
-SNAKEVIL_RETRIEVE_LOAD() {
-  [ "?.??" = "${SNAKEVIL_LOAD}" ] && return
-  SNAKEVIL_LOAD=`uptime \
+__PROFILEX_RETRIEVE_LOAD() {
+  [ "?.??" = "${PROFILEX[4]}" ] && return
+  PROFILEX[4]=`uptime \
     | awk -F'load average' '{print $2}' | awk '{print $2}'`
-  export SNAKEVIL_LOAD="${SNAKEVIL_LOAD:0:4}"
+  PROFILEX[4]="${PROFILEX[4]:0:4}"
   return
 }
 
-SNAKEVIL_UPDATE_PS1() {
+__PROFILEX_UPDATE_PS1() {
   local _ecode=$?
   local _jobs=`jobs`
   local _c=$CNone
@@ -64,7 +64,7 @@ SNAKEVIL_UPDATE_PS1() {
   fi
   _info="${_user}\[${_cs}\]@"
   unset _user
-  local _ip=`echo "${SNAKEVIL_IP}" \
+  local _ip=`echo "${PROFILEX[3]}" \
     | sed -e 's/^[^\.]*\.[^\.]*\(\.\)/\1/'`
   _title="${_title}@${_ip}"
   _ip="\[${_ci}\]${_ip}"
@@ -98,8 +98,8 @@ SNAKEVIL_UPDATE_PS1() {
   local _index="\[${_cs}\]i:\[${_cn}\]\!"
   _prompt="${_prompt}${_index}"
   unset _index
-  SNAKEVIL_RETRIEVE_LOAD
-  local _load="${SNAKEVIL_LOAD}"
+  __PROFILEX_RETRIEVE_LOAD
+  local _load="${PROFILEX[4]}"
   if [ "?.??" = "${_load}" -o "0.00" = "${_load}" ]; then
     _load=""
   elif expr "1.00" ">" "${_load}" > /dev/null 2>&1; then
@@ -142,7 +142,7 @@ SNAKEVIL_UPDATE_PS1() {
   unset _ce
 }
 
-export PROMPT_COMMAND='SNAKEVIL_UPDATE_PS1'
+export PROMPT_COMMAND='__PROFILEX_UPDATE_PS1'
 
 # }}}
 

@@ -92,17 +92,15 @@ CYellow='\e[1;33m'
 
 # {{{ Gathers prompting information.
 
-SNAKEVIL_IP="127.0.0.1"
+PROFILEX[3]="127.0.0.1"
 which awk head ifconfig > /dev/null \
-  && SNAKEVIL_IP=`ifconfig \
+  && PROFILEX[3]=`ifconfig \
     | awk '/inet /&&!/127\./{sub("addr:","");print $2}' \
     | head -n1`
-export SNAKEVIL_IP
 
-SNAKEVIL_LOAD="?.??"
+PROFILEX[4]="?.??"
 which sed uptime > /dev/null \
-  && SNAKEVIL_LOAD="0.00"
-export SNAKEVIL_LOAD
+  && PROFILEX[4]="0.00"
 
 # }}}
 

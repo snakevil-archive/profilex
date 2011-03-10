@@ -5,8 +5,9 @@
 
 [ -z "${BASH}" ] && return
 
-SNAKEVIL_SHTYPE="bash"
-export SNAKEVIL_SHTYPE
+PROFILEX=()
+export PROFILEX
+PROFILEX[1]="bash"
 
 [ -f "${HOME}/.profile" ] && source "${HOME}/.profile"
 

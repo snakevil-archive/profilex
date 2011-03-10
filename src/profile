@@ -22,48 +22,44 @@ which which > /dev/null 2>&1 || return
 
 if ! which awk grep ps > /dev/null
 then
-  SNAKEVIL_SHTYPE="sh"
+  PROFILEX[1]="sh"
 fi
 
 # }}}
 
 # {{{ Detects shell type.
 
-[ "bash" = "${SNAKEVIL_SHTYPE}" ] || {
-  SNAKEVIL_SHTYPE=`ps | grep $$ | awk '{print $4}'`
-  [ "sh" = "${SNAKEVIL_SHTYPE}" -a -n "${KSH_VERSION}" ] && \
-    SNAKEVIL_SHTYPE="ksh"
+[ "bash" = "${PROFILEX[1]}" ] || {
+  PROFILEX[1]=`ps | grep $$ | awk '{print $4}'`
+  [ "sh" = "${PROFILEX[1]}" -a -n "${KSH_VERSION}" ] && \
+    PROFILEX[1]="ksh"
 }
 
-case "${SNAKEVIL_SHTYPE}" in
+case "${PROFILEX[1]}" in
   bash )
-    ENV="ba"
+    PROFILEX[2]="ba"
     ;;
   *csh )
-    ENV="c"
+    PROFILEX[2]="c"
     ;;
   *ksh )
-    ENV="k"
+    PROFILEX[2]="k"
     ;;
   zsh )
-    ENV="z"
+    PROFILEX[2]="z"
     ;;
   * )
-    ENV=""
+    PROFILEX[2]=""
     ;;
 esac
-unset SNAKEVIL_SHTYPE
-ENV="${HOME}/.${ENV}shrc"
+PROFILEX[2]="${HOME}/.${PROFILEX[2]}shrc"
 
 # }}}
 
 # {{{ Loads shell's rc file.
 
-if [ -f "${ENV}" ]; then
-  export ENV
-  . "${ENV}"
-else
-  unset ENV
+if [ -f "${PROFILEX[2]}" ]; then
+  . "${PROFILEX[2]}"
 fi
 
 # }}}

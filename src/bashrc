@@ -13,8 +13,6 @@
 
 [ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"
 
-[ -f "${HOME}/.profilex/aliasz" ] && . "${HOME}/.profilex/aliasz"
-
 # }}}
 
 # {{{ Configs historial behavior.

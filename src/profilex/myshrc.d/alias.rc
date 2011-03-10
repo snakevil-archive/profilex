@@ -100,7 +100,15 @@ unset GROUPx
 
 # {{{ Loads custom extra aliases.
 
-[ -f "${HOME}/.aliasx" ] && . "${HOME}/.aliasx"
+if [ -r "${HOME}/.aliasx" ]
+then
+  . "${HOME}/.aliasx"
+fi
+
+if [ -r "${HOME}/.aliasrc" ]
+then
+  . "${HOME}/.aliasrc"
+fi
 
 # }}}
 

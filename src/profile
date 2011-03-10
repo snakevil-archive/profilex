@@ -1,7 +1,9 @@
 # ~/.profile
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  © 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2011 Snakevil.in.
+
+# {{{ Improves included paths.
 
 PATH='/usr/sbin:/usr/bin:/sbin:/bin'
 [ -d '/usr/local/bin' ] && PATH="/usr/local/bin:${PATH}"
@@ -12,12 +14,20 @@ PATH='/usr/sbin:/usr/bin:/sbin:/bin'
 [ -d '/opt/local/libexec/gnubin' ] && PATH="/opt/local/libexec/gnubin:${PATH}"
 [ -d '/opt/local/sbin' ] && PATH="/opt/local/sbin:${PATH}"
 
+# }}}
+
+# {{{ Checks essential cmds.
+
 which which > /dev/null 2>&1 || return
 
 if ! which awk grep ps > /dev/null
 then
   SNAKEVIL_SHTYPE="sh"
 fi
+
+# }}}
+
+# {{{ Detects shell type.
 
 [ "bash" = "${SNAKEVIL_SHTYPE}" ] || {
   SNAKEVIL_SHTYPE=`ps | grep $$ | awk '{print $4}'`
@@ -45,6 +55,10 @@ esac
 unset SNAKEVIL_SHTYPE
 ENV="${HOME}/.${ENV}shrc"
 
+# }}}
+
+# {{{ Loads shell's rc file.
+
 if [ -f "${ENV}" ]; then
   export ENV
   . "${ENV}"
@@ -52,5 +66,7 @@ else
   unset ENV
 fi
 
-# vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
-# vim:tw=75:ts=2:sts=2:et:si:ai:sw=2
+# }}}
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

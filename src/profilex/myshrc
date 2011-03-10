@@ -1,13 +1,23 @@
 # ~/.profilex/myshrc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  © 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2011 Snakevil.in.
 
-[ -z "${PS1}" ] && return;
+# {{{ Ensures to be interactive shell.
+
+[ -z "${PS1}" ] && return
+
+# }}}
+
+# {{{ Enhances included paths even more.
 
 [ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
 [ -d "${HOME}/sbin" ] && PATH="${HOME}/sbin:${PATH}"
 export PATH
+
+# }}}
+
+# {{{ Configs interactive behavior.
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -19,9 +29,6 @@ elif [ staff = `id -gn` -o users = `id -gn` ]; then
 else
   umask 002
 fi
-
-[ -r "${HOME}/.profilex/inputrc" ] \
-  && export INPUTRC="${HOME}/.profilex/inputrc"
 
 export EDITOR="vim"
 export PAGER="less"
@@ -36,17 +43,16 @@ elif [ -x "/opt/local${LESSOPENx}" ]; then
 fi
 unset LESSOPENx
 
-SNAKEVIL_IP="127.0.0.1"
-which awk head ifconfig > /dev/null \
-  && SNAKEVIL_IP=`ifconfig \
-    | awk '/inet /&&!/127\./{sub("addr:","");print $2}' \
-    | head -n1`
-export SNAKEVIL_IP
+# }}}
 
-SNAKEVIL_LOAD="?.??"
-which sed uptime > /dev/null \
-  && SNAKEVIL_LOAD="0.00"
-export SNAKEVIL_LOAD
+# {{{ Configs inputing behavior.
+
+[ -r "${HOME}/.profilex/inputrc" ] \
+  && export INPUTRC="${HOME}/.profilex/inputrc"
+
+# }}}
+
+# {{{ Configs highlighting behavior.
 
 if which dircolors > /dev/null; then
   if [ -r "${HOME}/.profilex/dircolors" ]; then
@@ -82,5 +88,23 @@ CUnder='\e[4m'
 CWhite='\e[1;37m'
 CYellow='\e[1;33m'
 
-# vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
-# vim:tw=75:ts=2:sts=2:et:si:ai:sw=2
+# }}}
+
+# {{{ Gathers prompting information.
+
+SNAKEVIL_IP="127.0.0.1"
+which awk head ifconfig > /dev/null \
+  && SNAKEVIL_IP=`ifconfig \
+    | awk '/inet /&&!/127\./{sub("addr:","");print $2}' \
+    | head -n1`
+export SNAKEVIL_IP
+
+SNAKEVIL_LOAD="?.??"
+which sed uptime > /dev/null \
+  && SNAKEVIL_LOAD="0.00"
+export SNAKEVIL_LOAD
+
+# }}}
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

@@ -1,14 +1,12 @@
 # ~/.profilex/aliasz
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
-# COPYRIGHT  © 2010 Snakevil.be/HERE
+# COPYRIGHT  © 2011 Snakevil.in.
 
-alias cp='cp -ai'
-which df > /dev/null && alias df='df -Th'
-which du > /dev/null && alias du='du -ch --time'
+# {{{ Highlights cmds' response.
+
 which egrep > /dev/null && alias egrep='egrep --color=auto'
 which fgrep > /dev/null && alias fgrep='fgrep --color=auto'
-which free > /dev/null && alias free='free -m'
 alias grep='grep --color=auto'
 
 case `uname -s` in
@@ -27,6 +25,7 @@ case `uname -s` in
 esac
 [ 0 -lt `ls --version 2> /dev/null | grep GNU | wc -l` ] \
   && platform="linux"
+
 if [ "bsd" = "${platform}" ]; then
   alias ls='ls -FG'
 elif [ "linux" = "${platform}" ]; then
@@ -38,18 +37,48 @@ elif [ "linux" = "${platform}" ]; then
 fi
 unset platform
 
-alias mkdir='mkdir -p'
-alias mv='mv -i'
-which ps > /dev/null \
-  && alias ps='ps -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args"'
-alias rm='rm -i'
-
-
 which colordiff > /dev/null && alias diff='colordiff -u' \
   || alias diff='diff -u'
-alias more='less'
-which vim > /dev/null && alias vi='vim'
 
+# }}}
+
+# {{{ Formats cmds' response for human-reading.
+
+which df > /dev/null && alias df='df -Th'
+which du > /dev/null && alias du='du -ch --time'
+which free > /dev/null && alias free='free -m'
+
+alias la='ll -A'
+alias ll='ls -hl'
+
+alias more='less'
+
+which ps > /dev/null \
+  && alias ps='ps -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args"'
+
+# }}}
+
+# {{{ Ensures operations' security for file-system.
+
+alias cp='cp -ai'
+
+alias mkdir='mkdir -p'
+
+alias mv='mv -i'
+alias rm='rm -i'
+
+# }}}
+
+# {{{ Shortcuts for habits of cmds.
+
+which sudo > /dev/null && alias su='sudo -s'
+
+which vim > /dev/null && alias vi='vim'
+alias v='vi'
+
+# }}}
+
+# {{{ Declares extra aliases for common tasks.
 
 COLORSx="echo -e '\e[1m1\e[0m\e[2m2\e[0m\e[3m3\e[0m\e[4m4\e[0m"
 COLORSx="${COLORSx}\e[5m5\e[0m\e[6m6\e[0m\e[7m7\e[0m\e[8m8\e[0m';"
@@ -60,11 +89,6 @@ COLORSx="${COLORSx}\e[45m45\e[46m46\e[47m47\e[49m49\e[0m'"
 alias ansicolors=$COLORSx
 unset COLORSx
 
-alias la='ll -A'
-alias ll='ls -hl'
-which sudo > /dev/null && alias su='sudo -s'
-alias v='vi'
-
 USERx=$USER
 [ -z "${SUDO_USER}" ] || USERx=$SUDO_USER
 GROUPx=`id -gn "${USERx}"`
@@ -72,8 +96,13 @@ alias own="chown -cRh ${USERx}:${GROUPx}"
 unset USERx
 unset GROUPx
 
+# }}}
+
+# {{{ Loads custom extra aliases.
 
 [ -f "${HOME}/.aliasx" ] && . "${HOME}/.aliasx"
 
-# vim:ft=sh:fenc=utf-8:ff=unix:nowrap:nu:nuw=4
-# vim:tw=75:ts=2:sts=2:et:si:ai:sw=2
+# }}}
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

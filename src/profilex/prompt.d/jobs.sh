@@ -10,7 +10,7 @@ which wc > /dev/null && {
   then
     _PROFILEX_JOBS=''
   else
-    _PROFILEX_JOBS=" J${_PROFILEX_JOBS}"
+    _PROFILEX_JOBS=" J${CSilver}${_PROFILEX_JOBS}"
   fi
 }
 

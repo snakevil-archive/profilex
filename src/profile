@@ -11,7 +11,7 @@ export PROFILEX_DBG=0
 [ -f "${HOME}/profilex.debug" ] && PROFILEX_DBG=1
 
 __PROFILEX_TRACE() {
-  [ "1" -ne "${PROFILEX_DBG}" ] && return
+  [ "x1" = "x${PROFILEX_DBG}" ] || return 0
   echo 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
 }
 

@@ -9,7 +9,7 @@
 # of Ubuntu 11.04 Natty.
 
 __PROFILEX_TRACE() {
-  [ "1" -ne "${PROFILEX_DBG}" ] && return
+  [ "x1" = "x${PROFILEX_DBG}" ] || return 0
   echo 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
 }
 

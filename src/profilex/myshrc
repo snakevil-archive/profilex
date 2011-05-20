@@ -9,20 +9,6 @@
 
 # }}}
 
-# {{{ Gathers prompting information.
-
-PROFILEX_IP="127.0.0.1"
-which awk head ifconfig > /dev/null \
-  && PROFILEX_IP=`ifconfig \
-    | awk '/inet /&&!/127\./{sub("addr:","");print $2}' \
-    | head -n1`
-
-PROFILEX_LD="?.??"
-which sed uptime > /dev/null \
-  && PROFILEX_LD="0.00"
-
-# }}}
-
 # {{{ Loads all other targeted behaviors.
 
 for file in `ls "${HOME}/.profilex/myshrc.d/"*".rc"`

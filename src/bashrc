@@ -49,122 +49,25 @@ __PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
 
 # {{{ Enhances shell prompt.
 
-__PROFILEX_RETRIEVE_LOAD() {
-  [ "?.??" = "${PROFILEX_LD}" ] && return
-  PROFILEX_LD=`uptime \
-    | awk -F'load average' '{print $2}' | awk '{print $2}'`
-  PROFILEX_LD="${PROFILEX_LD:0:4}"
-  return
+__PROFILEX_PROMPT() {
+  _PROFILEX_EXIT=$?
+  which sed > /dev/null || return 0
+  for file in `'ls' "${HOME}/.profilex/prompt.d/"*".sh"`
+  do
+    [ -r "${file}" ] && . "${file}"
+  done
+  local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' \
+    "${HOME}/.profilex/prompt.title"`
+  eval "title=\"${title}\""
+  echo -ne "\e]0;${title}\a"
+  unset title
+  local prompt=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' \
+    "${HOME}/.profilex/prompt"`
+  eval "PS1=\"${prompt}\""
+  export PS1
+  unset prompt
 }
-
-__PROFILEX_UPDATE_PS1() {
-  local _ecode=$?
-  local _jobs=`jobs`
-  local _c=$CNone
-  local _cs=$CGray
-  local _cu=$CAqua
-  local _cur=$CRed
-  local _cus=$CTeal
-  local _ci=$CPurple
-  local _cp=$COlive
-  local _cph=$CYellow
-  local _cn=$CSilver
-  local _cl=$CGreen
-  local _cln=$CMaroon
-  local _clw=$CRed
-  local _ce=$CRed
-  local _title="${USER}"
-  local _info=""
-  local _user="\[${_cu}\]${USER}"
-  if [ "0" -eq "${UID}" ]; then
-    _user="\[${_cur}\]${USER}"
-    [ -z "${SUDO_USER}" ] \
-      || { \
-        _title="${_title}(${SUDO_USER})"
-        _user="${_user}\[${_cs}\](\[${_cus}\]${SUDO_USER}\[${_cs}\])"
-      }
-  fi
-  _info="${_user}\[${_cs}\]@"
-  unset _user
-  local _ip=`echo "${PROFILEX_IP}" \
-    | sed -e 's/^[^\.]*\.[^\.]*\(\.\)/\1/'`
-  _title="${_title}@${_ip}"
-  _ip="\[${_ci}\]${_ip}"
-  _info="${_info}${_ip}"
-  unset _ip
-  local _path=`echo "${PWD}" \
-    | sed -e 's@^'"${HOME}"'/*@:@'`
-  if [ ":" = "${_path}" ]; then
-    _title="${_title}~"
-    _path="\[${_cph}\]~"
-  else
-    _title="${_title}${_path}"
-    _path="\[${_cp}\]${_path}"
-  fi
-  _title="${_title}"
-  case "${TERM}" in
-     xterm* )
-      echo -ne "\033]0;${_title}\007"
-      ;;
-  esac
-  _info="<${_info}${_path}\[${_cs}\]>"
-  if [ -n "${COLUMNS}" ]; then
-    local _len=`echo -n "${_title}" | wc -c | awk '{print $1}'`
-    _len=`expr "6" "+" "11" + "2" + "${_len}"`
-    [ "${_len}" -gt "${COLUMNS}" ] || _info="\d ${_info}"
-  fi
-  unset _title
-  _info="\[${_cs}\]\A ${_info}"
-  unset _path
-  local _prompt="\[${_cs}\]["
-  local _index="\[${_cs}\]i:\[${_cn}\]\!"
-  _prompt="${_prompt}${_index}"
-  unset _index
-  __PROFILEX_RETRIEVE_LOAD
-  local _load="${PROFILEX_LD}"
-  if [ "?.??" = "${_load}" -o "0.00" = "${_load}" ]; then
-    _load=""
-  elif expr "1.00" ">" "${_load}" > /dev/null 2>&1; then
-    _load=" \[${_cs}\]L:\[${_cl}\]${_load}"
-  elif expr "10.00" ">" "${_load}" > /dev/null 2>&1; then
-    _load=" \[${_cs}\]L:\[${_cln}\]${_load}"
-  else
-    _load=" \[${_cs}\]L:\[${_clw}\]${_load}"
-  fi
-  _prompt="${_prompt}${_load}"
-  unset _load
-  if [ -z "${_jobs}" ]; then
-    _jobs=
-  else
-    _jobs=" \[${_cs}\]J:\[${_cn}\]\j"
-  fi
-  _prompt="${_prompt}${_jobs}"
-  unset _jobs
-  local _exit=" \[${_cs}\]E:\[${_ce}\]\$?"
-  [ "0" -eq "${_ecode}" ] && _exit=""
-  _prompt="${_prompt}${_exit}"
-  unset _ecode
-  unset _exit
-  local _sign="\[${_c}\]\\$"
-  _prompt="${_prompt}\[${_cs}\]] ${_sign} "
-  unset _sign
-  export PS1="${_info}\n${_prompt}"
-  unset _c
-  unset _cs
-  unset _cu
-  unset _cur
-  unset _cus
-  unset _ci
-  unset _cp
-  unset _cph
-  unset _cn
-  unset _cl
-  unset _cln
-  unset _clw
-  unset _ce
-}
-
-export PROMPT_COMMAND='__PROFILEX_UPDATE_PS1'
+export PROMPT_COMMAND='__PROFILEX_PROMPT'
 
 # }}}
 

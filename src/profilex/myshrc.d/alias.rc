@@ -71,6 +71,8 @@ alias rm='rm -i'
 
 # {{{ Shortcuts for habits of cmds.
 
+which git > /dev/null && alias g='git'
+
 which sudo > /dev/null && alias su='sudo -s'
 
 which vim > /dev/null && alias vi='vim'
@@ -79,15 +81,6 @@ alias v='vi'
 # }}}
 
 # {{{ Declares extra aliases for common tasks.
-
-COLORSx="echo -e '\e[1m1\e[0m\e[2m2\e[0m\e[3m3\e[0m\e[4m4\e[0m"
-COLORSx="${COLORSx}\e[5m5\e[0m\e[6m6\e[0m\e[7m7\e[0m\e[8m8\e[0m';"
-COLORSx="${COLORSx}echo -e '\e[30m30\e[31m31\e[32m32\e[33m33\e[34m34"
-COLORSx="${COLORSx}\e[35m35\e[36m36\e[37m37\e[39m39\e[0m';"
-COLORSx="${COLORSx}echo -e '\e[40m40\e[41m41\e[42m42\e[43m43\e[44m44"
-COLORSx="${COLORSx}\e[45m45\e[46m46\e[47m47\e[49m49\e[0m'"
-alias ansicolors=$COLORSx
-unset COLORSx
 
 USERx=$USER
 [ -z "${SUDO_USER}" ] || USERx=$SUDO_USER

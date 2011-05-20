@@ -6,10 +6,11 @@
 case "${PWD}" in
   "${HOME}"* )
     _PROFILEX_PWD=`echo "${PWD}" \
-      | sed -e "s@^${HOME}@~@"`
+      | sed -e "s@^${HOME}@@"`
+    _PROFILEX_PWD="${CYellow}~${COlive}${_PROFILEX_PWD}"
     ;;
   * )
-    _PROFILEX_PWD="${PWD}"
+    _PROFILEX_PWD="${COlive}${PWD}"
     ;;
 esac
 

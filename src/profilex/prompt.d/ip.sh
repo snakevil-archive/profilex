@@ -10,6 +10,7 @@
       | awk '/inet /&&!/127\./{sub("addr:","");print $2}' \
       | head -n1 \
       | sed -e 's/^[^\.]*\.[^\.]*\(\.\)/\1/'`
+  _PROFILEX_IP="${CPurple}${_PROFILEX_IP}"
 }
 
 # vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si

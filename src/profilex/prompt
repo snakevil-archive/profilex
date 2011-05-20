@@ -1,2 +1,2 @@
-%TIME% <%USER%@%IP%:%PWD%>
-[%INDEX%%LOAD%%JOBS%%EXIT%%GITBR%] %SYMBOL% 
+%TIME% ${CBase}<%USER%${CBase}@%IP%${CBase}:%PWD%${CBase}>
+${CBase}[%INDEX%%LOAD%%JOBS%%EXIT%%GITBR%${CBase}] %SYMBOL% 

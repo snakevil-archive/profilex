@@ -52,6 +52,7 @@ __PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
 __PROFILEX_PROMPT() {
   _PROFILEX_EXIT=$?
   which sed > /dev/null || return 0
+  local CBase="${CGray}"
   for file in `'ls' "${HOME}/.profilex/prompt.d/"*".sh"`
   do
     [ -r "${file}" ] && . "${file}"
@@ -59,9 +60,11 @@ __PROFILEX_PROMPT() {
   local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' \
     "${HOME}/.profilex/prompt.title"`
   eval "title=\"${title}\""
+  title=`echo "${title}" \
+    | sed -e 's/\\\e\[[0-9;]*m//g'`
   echo -ne "\e]0;${title}\a"
   unset title
-  local prompt=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' \
+  local prompt=`sed -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' \
     "${HOME}/.profilex/prompt"`
   eval "PS1=\"${prompt}\""
   export PS1

@@ -3,10 +3,11 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-_PROFILEX_USER="${USER}"
+_PROFILEX_USER="${CAqua}${USER}"
 [ 0 -eq $UID ] && {
+  _PROFILEX_USER="${CMaroon}${USER}"
   [ -z "${SUDO_USER}" ] || {
-    _PROFILEX_USER="${SUDO_USER}(root)"
+    _PROFILEX_USER="${CRed}root${CBase}(${CTeal}${SUDO_USER}${CBase})"
   }
 }
 

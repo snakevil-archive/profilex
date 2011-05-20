@@ -1,0 +1,65 @@
+# ~/.profilex/colors.rc
+#
+# AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
+# COPYRIGHT  © 2011 Snakevil.in.
+
+# {{{ Highlights the LS result.
+
+if which dircolors > /dev/null; then
+  if [ -r "${HOME}/.profilex/dircolors" ]; then
+    eval `dircolors -b "${HOME}/.profilex/dircolors"`
+  else
+    eval `dircolors -b`
+  fi
+fi
+
+# }}}
+
+# {{{ Highlights the LESS result if possible.
+
+export PAGER="less -M -N"
+
+LESSOPENx="/share/source-highlight/src-hilite-lesspipe.sh"
+if [ -x "/usr${LESSOPENx}" ]; then
+    export LESSOPEN="| /usr${LESSOPENx} %s"
+    export LESS=' -R '
+elif [ -x "/opt/local${LESSOPENx}" ]; then
+    export LESSOPEN="| /opt/local${LESSOPENx} %s"
+    export LESS=' -R '
+fi
+unset LESSOPENx
+
+# }}}
+
+# {{{ Defines standard colors for further usage.
+
+CAqua='\e[1;36m'
+CBlack='\e[0;30m'
+CBlink='\e[5m'
+CBlue='\e[1;34m'
+CDefault='\e[39m'
+CFuchsia='\e[1;35m'
+CGray='\e[1;30m'
+CGreen='\e[0;32m'
+CHigh='\e[1m'
+CInvisible='\e[8m'
+CItalic='\e[3m'
+CLime='\e[1;32m'
+CMaroon='\e[0;31m'
+CNavy='\e[0;34m'
+CNone='\e[0m'
+COlive='\e[0;33m'
+CPurple='\e[0;35m'
+CRed='\e[0;31m'
+CReverse='\e[7m'
+CSilver='\e[0;37m'
+CTeal='\e[0;36m'
+CThrough='\e[9m'
+CUnder='\e[4m'
+CWhite='\e[1;37m'
+CYellow='\e[1;33m'
+
+# }}}
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

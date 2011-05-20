@@ -1,0 +1,31 @@
+# ~/.profilex/interactive.rc
+#
+# AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
+# COPYRIGHT  © 2011 Snakevil.in.
+
+# {{{ Configs inputing behavior.
+
+[ -r "${HOME}/.profilex/inputrc" ] \
+  && export INPUTRC="${HOME}/.profilex/inputrc"
+
+# }}}
+
+# {{{ Configs interactive behavior.
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+if [ `id -un` = `id -gn` ]; then
+  umask 022
+elif [ staff = `id -gn` -o users = `id -gn` ]; then
+  umask 022
+else
+  umask 002
+fi
+
+export EDITOR="vim"
+
+# }}}
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

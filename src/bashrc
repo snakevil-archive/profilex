@@ -64,9 +64,12 @@ __PROFILEX_PROMPT() {
     | sed -e 's/\\\e\[[0-9;]*m//g'`
   echo -ne "\e]0;${title}\a"
   unset title
-  local prompt=`sed -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' \
+  local prompt=`sed -e 'N;s/\\n/\\\n/g' \
+    -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' \
     "${HOME}/.profilex/prompt"`
   eval "PS1=\"${prompt}\""
+  PS1=`echo -n "${PS1}" \
+    | sed -e 's/\(\\\e\[[0-9;]*m\)/\\\[\1\\\]/g'`
   export PS1
   unset prompt
 }

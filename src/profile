@@ -1,7 +1,23 @@
-# ~/.profile
+# ~/.profile: Personal .profile file for the Bourne shell (sh(1)) and
+# Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
+
+# {{{ Detects running mode: Production, Debugging, ...
+
+export PROFILEX_DBG=0
+
+[ -f "${HOME}/profilex.debug" ] && PROFILEX_DBG=1
+
+__PROFILEX_TRACE() {
+  [ "1" -ne "${PROFILEX_DBG}" ] && return
+  echo 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
+}
+
+# ]}}
+
+__PROFILEX_TRACE 'profile: 1) BEGAN.'
 
 # {{{ Improves included paths.
 
@@ -13,56 +29,68 @@ PATH='/usr/sbin:/usr/bin:/sbin:/bin'
 [ -d '/opt/local/bin' ] && PATH="/opt/local/bin:${PATH}"
 [ -d '/opt/local/libexec/gnubin' ] && PATH="/opt/local/libexec/gnubin:${PATH}"
 [ -d '/opt/local/sbin' ] && PATH="/opt/local/sbin:${PATH}"
+export PATH
 
 # }}}
 
-# {{{ Checks essential cmds.
+__PROFILEX_TRACE 'profile: 2) PATH optimized.'
 
-which which > /dev/null 2>&1 || return
+# {{{ Detects the shell type.
 
-if ! which awk grep ps > /dev/null
+PROFILEX_SH="sh"
+
+[ -z "${BASH}" ] || PROFILEX_SH="bash"
+
+if ! which awk grep ps > /dev/null 2>&1
 then
-  PROFILEX[1]="sh"
+  PROFILEX_SH="sh"
 fi
 
-# }}}
-
-# {{{ Detects shell type.
-
-[ "bash" = "${PROFILEX[1]}" ] || {
-  PROFILEX[1]=`ps | grep $$ | awk '{print $4}'`
-  [ "sh" = "${PROFILEX[1]}" -a -n "${KSH_VERSION}" ] && \
-    PROFILEX[1]="ksh"
+[ "bash" = "${PROFILEX_SH}" ] || {
+  PROFILEX_SH=`ps | grep $$ | awk '{print $4}'`
+  [ "sh" = "${PROFILEX_SH}" -a -n "${KSH_VERSION}" ] && \
+    PROFILEX_SH="ksh"
 }
 
-case "${PROFILEX[1]}" in
+# }}}
+
+__PROFILEX_TRACE 'profile: 3) Shell type detected.'
+
+# {{{ Loads the shell RC script.
+
+case "${PROFILEX_SH}" in
   bash )
-    PROFILEX[2]="ba"
+    PROFILEX_RC="ba"
     ;;
   *csh )
-    PROFILEX[2]="c"
+    PROFILEX_RC="c"
     ;;
   *ksh )
-    PROFILEX[2]="k"
+    PROFILEX_RC="k"
     ;;
   zsh )
-    PROFILEX[2]="z"
+    PROFILEX_RC="z"
     ;;
   * )
-    PROFILEX[2]=""
+    PROFILEX_RC=""
     ;;
 esac
-PROFILEX[2]="${HOME}/.${PROFILEX[2]}shrc"
+PROFILEX_RC="${HOME}/.${PROFILEX_RC}shrc"
+
+[ -n "${PS1}" ] && [ -r "${PROFILEX_RC}" ] && . "${PROFILEX_RC}"
 
 # }}}
 
-# {{{ Loads shell's rc file.
+__PROFILEX_TRACE 'profile: 4) RC loaded.'
 
-if [ -f "${PROFILEX[2]}" ]; then
-  . "${PROFILEX[2]}"
-fi
+# {{{ Clean up.
+
+unset PROFILEX_SH
+unset PROFILEX_RC
 
 # }}}
+
+__PROFILEX_TRACE 'profile: 5) OVER!'
 
 # vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
 # vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

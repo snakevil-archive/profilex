@@ -1,19 +1,39 @@
-# ~/.bashrc
+# ~/.bashrc: Personal .bashrc file for interactive bash(1) shells.
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-# {{{ Ensures shell type to be bash.
+# {{{ Detects running mode: Production, Debugging, ...
 
-[ -z "$BASH_VERSION" ] && return
+# Redefine function '__PROFILEX_TRACE()' to compat with the default profile
+# of Ubuntu 11.04 Natty.
+
+__PROFILEX_TRACE() {
+  [ "1" -ne "${PROFILEX_DBG}" ] && return
+  echo 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
+}
 
 # }}}
+
+__PROFILEX_TRACE 'bashrc: 1) BEGAN.'
+
+# {{{ Ensures shell type to be bash.
+
+[ -z "${BASH_VERSION}" ] && return
+
+[ -z "${PS1}" ] && return
+
+# }}}
+
+__PROFILEX_TRACE 'bashrc: 2) Interactive shell validated.'
 
 # {{{ Personalizes shell environment.
 
 [ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"
 
 # }}}
+
+__PROFILEX_TRACE 'bashrc: 3) Myshrc loaded.'
 
 # {{{ Configs historial behavior.
 
@@ -24,6 +44,8 @@ export HISTSIZE=2010
 export HISTTIMEFORMAT="%F %T "
 
 # }}}
+
+__PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
 
 # {{{ Enhances shell prompt.
 
@@ -146,6 +168,8 @@ export PROMPT_COMMAND='__PROFILEX_UPDATE_PS1'
 
 # }}}
 
+__PROFILEX_TRACE 'bashrc: 5) Prompting enhanced.'
+
 # {{{ Loads bash completion.
 
 if [ -f "/opt/local/etc/bash_completion" ]; then
@@ -159,6 +183,8 @@ elif [ -f "/etc/bash_completion" ]; then
 fi
 
 # }}}
+
+__PROFILEX_TRACE 'bashrc: 6) OVER!'
 
 # vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
 # vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

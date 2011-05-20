@@ -50,10 +50,10 @@ __PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
 # {{{ Enhances shell prompt.
 
 __PROFILEX_RETRIEVE_LOAD() {
-  [ "?.??" = "${PROFILEX[4]}" ] && return
-  PROFILEX[4]=`uptime \
+  [ "?.??" = "${PROFILEX_LD}" ] && return
+  PROFILEX_LD=`uptime \
     | awk -F'load average' '{print $2}' | awk '{print $2}'`
-  PROFILEX[4]="${PROFILEX[4]:0:4}"
+  PROFILEX_LD="${PROFILEX_LD:0:4}"
   return
 }
 
@@ -86,7 +86,7 @@ __PROFILEX_UPDATE_PS1() {
   fi
   _info="${_user}\[${_cs}\]@"
   unset _user
-  local _ip=`echo "${PROFILEX[3]}" \
+  local _ip=`echo "${PROFILEX_IP}" \
     | sed -e 's/^[^\.]*\.[^\.]*\(\.\)/\1/'`
   _title="${_title}@${_ip}"
   _ip="\[${_ci}\]${_ip}"
@@ -121,7 +121,7 @@ __PROFILEX_UPDATE_PS1() {
   _prompt="${_prompt}${_index}"
   unset _index
   __PROFILEX_RETRIEVE_LOAD
-  local _load="${PROFILEX[4]}"
+  local _load="${PROFILEX_LD}"
   if [ "?.??" = "${_load}" -o "0.00" = "${_load}" ]; then
     _load=""
   elif expr "1.00" ">" "${_load}" > /dev/null 2>&1; then

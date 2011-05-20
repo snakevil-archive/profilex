@@ -1,2 +1,2 @@
 %TIME% ${CBase}<%USER%${CBase}@%IP%${CBase}:%PWD%${CBase}>
-${CBase}[%INDEX%%LOAD%%JOBS%%EXIT%%GIT_BRANCH%${CBase}] %SYMBOL% %END%
+${CBase}[%INDEX%%LOAD%%JOBS%%EXIT%%GIT_BRANCH%%HG_BRANCH%${CBase}] %SYMBOL% %END%

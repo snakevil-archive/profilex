@@ -57,6 +57,10 @@ __PROFILEX_PROMPT() {
   do
     [ -r "${file}" ] && . "${file}"
   done
+  for file in `'ls' "${HOME}/.profilex.rc/prompt.d/"*".sh" 2> /dev/null`
+  do
+    [ -r "${file}" ] && . "${file}"
+  done
   local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' \
     "${HOME}/.profilex.rc/prompt.title"`
   eval "title=\"${title}\""

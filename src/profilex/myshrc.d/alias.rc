@@ -56,14 +56,9 @@ unset GROUPx
 
 # {{{ Loads custom extra aliases.
 
-if [ -r "${HOME}/.aliasx" ]
+if [ -r "${HOME}/.profilex.rc/alias.rc" ]
 then
-  . "${HOME}/.aliasx"
-fi
-
-if [ -r "${HOME}/.aliasrc" ]
-then
-  . "${HOME}/.aliasrc"
+  . "${HOME}/.profilex.rc/alias.rc"
 fi
 
 # }}}

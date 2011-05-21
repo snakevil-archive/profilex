@@ -1,4 +1,4 @@
-# ~/.profilex/myshrc
+# ~/.local/ProfileX/myshrc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
@@ -11,7 +11,7 @@
 
 # {{{ Loads all other targeted behaviors.
 
-for file in `ls "${HOME}/.profilex/myshrc.d/"*".rc"`
+for file in `ls "${HOME}/.local/ProfileX/myshrc.d/"*".rc"`
 do
   [ -r "${file}" ] && . "${file}"
 done

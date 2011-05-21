@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/time.sh
+# ~/.local/ProfileX/prompt.d/time.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

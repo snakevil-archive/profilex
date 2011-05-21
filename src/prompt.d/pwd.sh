@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/pwd.sh
+# ~/.local/ProfileX/prompt.d/pwd.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

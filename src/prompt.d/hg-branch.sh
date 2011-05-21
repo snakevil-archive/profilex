@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/hg-branch.sh
+# ~/.local/ProfileX/prompt.d/hg-branch.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

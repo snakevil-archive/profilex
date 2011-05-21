@@ -1,13 +1,13 @@
-# ~/.profilex/prompt.d/exit.sh
+# ~/.local/ProfileX/prompt.d/symbol.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-if [ 'x0' = "x${_PROFILEX_EXIT}" ]
+if [ 'x0' = "x${UID}" ]
 then
-  _PROFILEX_EXIT=''
+  _PROFILEX_SYMBOL='#'
 else
-  _PROFILEX_EXIT=" E${CRed}${_PROFILEX_EXIT}"
+  _PROFILEX_SYMBOL='$'
 fi
 
 # vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si

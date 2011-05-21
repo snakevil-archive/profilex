@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/ip.sh
+# ~/.local/ProfileX/prompt.d/ip.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

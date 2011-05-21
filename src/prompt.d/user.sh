@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/user.sh
+# ~/.local/ProfileX/prompt.d/user.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

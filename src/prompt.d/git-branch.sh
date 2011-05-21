@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/git-branch.sh
+# ~/.local/ProfileX/prompt.d/git-branch.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

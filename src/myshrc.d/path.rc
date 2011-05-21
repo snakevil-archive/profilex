@@ -1,14 +1,11 @@
-# ~/.profilex/prompt.d/symbol.sh
+# ~/.local/ProfileX/myshrc.d/path.rc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-if [ 'x0' = "x${UID}" ]
-then
-  _PROFILEX_SYMBOL='#'
-else
-  _PROFILEX_SYMBOL='$'
-fi
+[ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
+[ -d "${HOME}/sbin" ] && PATH="${HOME}/sbin:${PATH}"
+export PATH
 
 # vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
 # vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

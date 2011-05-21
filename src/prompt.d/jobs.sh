@@ -1,4 +1,4 @@
-# ~/.profilex/prompt.d/jobs.sh
+# ~/.local/ProfileX/prompt.d/jobs.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

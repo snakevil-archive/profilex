@@ -29,7 +29,7 @@ __PROFILEX_TRACE 'bashrc: 2) Interactive shell validated.'
 
 # {{{ Personalizes shell environment.
 
-[ -f "${HOME}/.profilex/myshrc" ] && source "${HOME}/.profilex/myshrc"
+. "${HOME}/.local/ProfileX/myshrc"
 
 # }}}
 
@@ -53,7 +53,7 @@ __PROFILEX_PROMPT() {
   _PROFILEX_EXIT=$?
   which sed > /dev/null || return 0
   local CBase="${CGray}"
-  for file in `'ls' "${HOME}/.profilex/prompt.d/"*".sh"`
+  for file in `'ls' "${HOME}/.local/ProfileX/prompt.d/"*".sh"`
   do
     [ -r "${file}" ] && . "${file}"
   done
@@ -62,7 +62,7 @@ __PROFILEX_PROMPT() {
     [ -r "${file}" ] && . "${file}"
   done
   local path="${HOME}/.profilex.rc/prompt.title"
-  [ -r "${path}" ] || path="${HOME}/.profilex/prompt.title"
+  [ -r "${path}" ] || path="${HOME}/.local/ProfileX/prompt.title"
   local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' "${path}"`
   eval "title=\"${title}\""
   title=`echo "${title}" \
@@ -70,7 +70,7 @@ __PROFILEX_PROMPT() {
   echo -ne "\e]0;${title}\a"
   unset title
   path="${HOME}/.profilex.rc/prompt.ps1"
-  [ -r "${path}" ] || path="${HOME}/.profilex/prompt.ps1"
+  [ -r "${path}" ] || path="${HOME}/.local/ProfileX/prompt.ps1"
   local prompt=`sed -e '86N;s/\\n/\\\n/g' \
     -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' "${path}"`
   eval "PS1=\"${prompt}\""

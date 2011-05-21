@@ -3,46 +3,9 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-# {{{ Highlights cmds' response.
-
-which egrep > /dev/null && alias egrep='egrep --color=auto'
-which fgrep > /dev/null && alias fgrep='fgrep --color=auto'
-alias grep='grep --color=auto'
-
-case `uname -s` in
-  Linux )
-    platform="linux"
-    ;;
-  *[Bb][Ss][Dd] )
-    platform="bsd"
-    ;;
-  Darwin )
-    platform="bsd"
-    ;;
-  * )
-    platform="unknown"
-    ;;
-esac
-[ 0 -lt `ls --version 2> /dev/null | grep GNU | wc -l` ] \
-  && platform="linux"
-
-if [ "bsd" = "${platform}" ]; then
-  alias ls='ls -FG'
-elif [ "linux" = "${platform}" ]; then
-  if [ "cygwin" = "${TERM}" ]; then
-    alias ls='ls -F --color=auto --show-control-chars'
-  else
-    alias ls='ls -F --color=auto'
-  fi
-fi
-unset platform
-
-which colordiff > /dev/null && alias diff='colordiff -u' \
-  || alias diff='diff -u'
-
-# }}}
-
 # {{{ Formats cmds' response for human-reading.
+
+alias cat='cat -sb'
 
 which df > /dev/null && alias df='df -Th'
 which du > /dev/null && alias du='du -ch --time'
@@ -53,8 +16,8 @@ alias ll='ls -hl'
 
 alias more='less'
 
-which ps > /dev/null \
-  && alias ps='ps -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args"'
+which ps > /dev/null && \
+  alias ps='ps -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args"'
 
 # }}}
 

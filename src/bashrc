@@ -61,16 +61,18 @@ __PROFILEX_PROMPT() {
   do
     [ -r "${file}" ] && . "${file}"
   done
-  local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' \
-    "${HOME}/.profilex.rc/prompt.title"`
+  local path="${HOME}/.profilex.rc/prompt.title"
+  [ -r "${path}" ] || path="${HOME}/.profilex/prompt.title"
+  local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' "${path}"`
   eval "title=\"${title}\""
   title=`echo "${title}" \
     | sed -e 's/\\\e\[[0-9;]*m//g'`
   echo -ne "\e]0;${title}\a"
   unset title
+  path="${HOME}/.profilex.rc/prompt.ps1"
+  [ -r "${path}" ] || path="${HOME}/.profilex/prompt.ps1"
   local prompt=`sed -e '86N;s/\\n/\\\n/g' \
-    -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' \
-    "${HOME}/.profilex.rc/prompt.ps1"`
+    -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' "${path}"`
   eval "PS1=\"${prompt}\""
   PS1=`echo -n "${PS1}" \
     | sed -e 's/\(\\\e\[[0-9;]*m\)/\\\[\1\\\]/g'`

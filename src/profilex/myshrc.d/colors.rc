@@ -31,6 +31,25 @@ unset LESSOPENx
 
 # }}}
 
+# {{{ Highlights the MANPAGEs.
+
+# begins BLINKing.
+export LESS_TERMCAP_mb=$'\e[5;37m'
+# begins BOLD.
+export LESS_TERMCAP_md=$'\e[1;36m'
+# returns NORMAL.
+export LESS_TERMCAP_me=$'\e[0m'
+# begins STANDOUT-MODE.
+export LESS_TERMCAP_so=$'\e[1;44;33m'
+# ends STANDOUT-MODE.
+export LESS_TERMCAP_se=$'\e[0m'
+# begins UNDERLINE.
+export LESS_TERMCAP_us=$'\e[1;33m'
+# ends UNDERLINE.
+export LESS_TERMCAP_ue=$'\e[0m'
+
+# }}}
+
 # {{{ Defines standard colors for further usage.
 
 CNone='\e[0m'
@@ -85,9 +104,18 @@ CAqua='\e[1;36m'
 COLORS="${COLORS}echo -e 'CAqua\t\t${CAqua}ANSICOLORS${CNone}\te[1;36m';"
 CWhite='\e[1;37m'
 COLORS="${COLORS}echo -e 'CWhite\t\t${CWhite}ANSICOLORS${CNone}\te[1;37m';"
+COLORS="${COLORS}echo -e '\t\t----------';"
+COLORS="${COLORS}echo -e '\t\t\e[40mANSICOLORS${CNone}\te[0;40m';"
+COLORS="${COLORS}echo -e '\t\t\e[41mANSICOLORS${CNone}\te[0;41m';"
+COLORS="${COLORS}echo -e '\t\t\e[42mANSICOLORS${CNone}\te[0;42m';"
+COLORS="${COLORS}echo -e '\t\t\e[43mANSICOLORS${CNone}\te[0;43m';"
+COLORS="${COLORS}echo -e '\t\t\e[44mANSICOLORS${CNone}\te[0;44m';"
+COLORS="${COLORS}echo -e '\t\t\e[45mANSICOLORS${CNone}\te[0;45m';"
+COLORS="${COLORS}echo -e '\t\t\e[46mANSICOLORS${CNone}\te[0;46m';"
+COLORS="${COLORS}echo -e '\t\t\e[47mANSICOLORS${CNone}\te[0;47m';"
+COLORS="${COLORS}echo -e '\t\t\e[48mANSICOLORS${CNone}\te[0;48m';"
 
 alias ansicolors=$COLORS
-alias colors='ansicolors'
 unset COLORS
 
 # }}}

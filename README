@@ -1,8 +1,129 @@
-Personal profiles for Bourne compatible shells (sh(1), bash(1), csh(1),
- ksh(1), zsh(1), ...).
 
-This project is under license CREATIVE COMMONS
- Attribution-NonCommercial-Share Alike v3.0
 
-Getting-Started by Snakevil Zen <zsnakevil at gmail dot com> on 6 May
- 2010.
+                                      .+ooy
+    `.---/:.`                       `ym+``.        :+               .`    -h/
+  -so+sooyymd                       oMh     hh+   `Mm              `dN:  -NN+
+  +m/os `-/hy`--.`-/-`   .:-.``     sMd     ++-   /Mh      `...-.   `sNosNh:
+  `.-Nmyhy+/` hNmdhhmo -hmy+oyhy-` .hMMhhs/-ms    /My    `:dy+//h+    +MMs`
+    :My-.     `sMs` .` mN-   `.dNo:ydmMs+../Ms    /Md    /Mdssyhy/   `hNNN/
+    -My        /My    `mN+:-.:hms````hM/   /Mh-:+`+MN/::-`hNmho-```  sd-.hNs`
+    .dm`       :No     `.+ss/oo:     yM-   `/yhs/ -oshho` `:oydyyyh. /.  `sd/
+     ``         `                    hN-      `               ` ```        `
+                                    -s-
+
+
+                                                         `--  .:-   ``  .-  ..-
+                                                         /os. /+s.  /+ :+  `h.`
+                                                         :/o: +/:/-`:/ +o-  y--
+---------------------------------------------------------+o/--+/--/s+/-:s+:.+--
+ BRIEF
+
+`ProfileX' is a powerful and beautiful toolkit for Bourne-compatible shells (sh,
+ bash, ...).
+
+Bases on shell profile scripts.
+
+
+                                                 `         `   `  `      ``  ``
+                                                 y   :/ `/-:` +-` o:` o `o- -/.
+                                                 y   :/ o-   .h-` o-+-o  s. h:.
+-------------------------------------------------s:/.:/`-o//-.s/-`s``/+`-o/`+o:`
+ LICENSE
+
+This work is under the license CREATIVE COMMONS
+ Attribution-NonCommercial-ShareAlike v3.0.
+
+You can found the License Deed at http://j.mp/lrLpYz
+
+For more detailed Legal Code, please visit http://j.mp/lK91eq
+
+
+                    `: .:  `. ./..--- ./`    /`   +   -/`   ---- -. `.-. `/` `-
+                    `y  y+-:/ /+ `:+`  o+-   s`   y    s+-  `+:` o- s.`o. s+:.o
+                     s  o -s- .y` -o``//-//: o..` y..`+/-//- //` +. o:.+` s -o/
+---------------------/-:/--:--//--:/::/----/-///:-///::---:/-:/:-/:--//:--/--::.
+ INSTALLATION
+
+a). Get the source code:
+
+`ProfileX' is exposed on the internet via git, you can retrieve the source code
+ using:
+
+    git clone git://snakevil.in/profilex ProfileX
+
+b). Install:
+
+`ProfileX' obeys the `GNU make' standard. So you can install it simply using:
+
+    cd ProfileX
+    make install
+
+c). Uninstall:
+
+Opposites to the section b, to uninstall it, just using:
+
+    make uninstall
+
+
+  `..   .` `-.     ..  ``  ``   ` ..     .    . `...` ..    ```` ``   `  `.   `
+  /+/: o-` -s+:   -o` +-:o `y/`-/ `s/`   s`  `y `.:o- `s/`  -+/. o- /:-o``y/``o
+  :/-` d-` -o+:-  `s.`y``s  o./o: -o:o:` s`   y .+:`` :o:o:` +-  +. y. o. o`/++
+--//...+o/./+.-/s//s:./o+:.-o.-+::+---:o-o++/.o.oo++o:+---:o-/s:.+:.:++:--o.-/:.
+ PERSONALIZATION
+
+`ProfileX` currently supports customized prompting and aliases via preferences
+in the RC folder '$HOME/.profilexrc'. That folder would not be changed while
+installations and uninstallations, so donot worry about that.
+
+a). Prompting:
+
+  1. Use your own templates:
+
+  Creates a new file 'prompt.ps1' in the folder '$HOME/.profilexrc', the PS1
+   prompting would be changed. To personalize the terminal window title, you
+   have to create a new file 'prompt.title' in the same folder.
+
+    cd $HOME/.profilexrc
+    touch prompt.ps1
+    touch prompt.title
+
+  2. Add more variants:
+
+  Personal prompting variants could be used as you wish. To realize that,
+   creates several corresponding scripts in the folder
+   '$HOME/.profilexrc/prompt.d', and then modifies the prompting templates files
+   with the fresh variants.
+
+  Donot about the executions of the added scripts, those should be cyclical
+   loaded automatically.
+
+    cd $HOME/.profilexrc
+    mkdir prompt.d
+    cd prompt.d
+    touch new.sh
+    cd ..
+    echo %NEW% >> prompt.ps1
+
+b). Aliases:
+
+Personal aliases should be put into the file 'alias.rc' in the folder
+ '$HOME/.profilexrc'. As a result, those aliases should be effected at the next
+ login time.
+
+    cd $HOME/.profilexrc
+    touch alias.rc
+    logout
+
+Notice: Once there have been any dissatisfied aliases from `ProfileX', you can
+`unalias' or override them in that file too.
+
+
+                                  `:-: `::/` //+.o. `+ s:o   o  ./-: `o  + .:+:`
+                                  s`   o- .o +:+``+/o` yoo`  y  h` `  h:-h   s
+                                  /+-:`.o:/. +.   .s   y `/+/s  /-:y  o  o  `y-
+--------------------------------------------------:.--------:------..----------.
+ COPYRIGHT
+
+Copyright © 2010-2011 Snakevil Zen <zsnakevil@gmail.com>. RIGHTS RESERVED.
+
+Last-Modified in May 22nd 2011. Getting-Started in May 6th 2010.

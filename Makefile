@@ -3,11 +3,11 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
+PROFILES = bash_profile bashrc profile
+
 PREFIX = $(HOME)
 PROFILEX = $(PREFIX)/.local/ProfileX
 PROFILEXRC = $(PREFIX)/.profilexrc
-
-BackupFiles = $(notdir $(wildcard src/hook.d/*))
 
 ProfileX:
 
@@ -15,21 +15,21 @@ install: ProfileX
 	test -d $(dir $(PROFILEX)) || mkdir -p $(dir $(PROFILEX))
 	rm -f $(PROFILEX)
 	ln -s $(abspath src) $(PROFILEX)
-	$(if $(wildcard $(addprefix $(PREFIX)/., $(BackupFiles))), \
+	$(if $(wildcard $(addprefix $(PREFIX)/., $(PROFILES))), \
 		test -d $(PROFILEXRC)/backup || mkdir -p $(PROFILEXRC)/backup; \
-		mv -t $(PROFILEXRC)/backup $(wildcard $(addprefix $(PREFIX)/., $(BackupFiles))) \
+		mv -t $(PROFILEXRC)/backup $(wildcard $(addprefix $(PREFIX)/., $(PROFILES))) \
 	)
-	$(foreach file, $(notdir $(wildcard src/hook.d/*)), \
-		ln -s .local/$(notdir $(PROFILEX))/hook.d/$(file) $(PREFIX)/.$(file); \
+	$(foreach file, $(PROFILES), \
+		ln -s .local/$(notdir $(PROFILEX))/etc/$(file) $(PREFIX)/.$(file); \
 	)
 
 uninstall: ProfileX
-	$(if $(wildcard $(addprefix $(PREFIX)/., $(BackupFiles))), \
-		rm -f $(wildcard $(addprefix $(PREFIX)/., $(BackupFiles))) \
+	$(if $(wildcard $(addprefix $(PREFIX)/., $(PROFILES))), \
+		rm -f $(wildcard $(addprefix $(PREFIX)/., $(PROFILES))) \
 	)
 	rm -f $(PROFILEX)
-	$(if $(wildcard $(addprefix $(PROFILEXRC)/backup/., $(BackupFiles))), \
-		mv -t $(PREFIX) $(wildcard $(addprefix $(PROFILEXRC)/backup/., $(BackupFiles))) \
+	$(if $(wildcard $(addprefix $(PROFILEXRC)/backup/., $(PROFILES))), \
+		mv -t $(PREFIX) $(wildcard $(addprefix $(PROFILEXRC)/backup/., $(PROFILES))) \
 	)
 	rm -fr $(PROFILEXRC)/backup
 

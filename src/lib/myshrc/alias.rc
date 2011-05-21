@@ -1,4 +1,4 @@
-# ~/.local/ProfileX/myshrc.d/alias.rc
+# ~/.local/ProfileX/lib/myshrc/alias.rc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
@@ -56,9 +56,9 @@ unset GROUPx
 
 # {{{ Loads custom extra aliases.
 
-if [ -r "${HOME}/.profilexrc/alias.rc" ]
+if [ -r "${_PROFILEXRC}/alias.rc" ]
 then
-  . "${HOME}/.profilexrc/alias.rc"
+  . "${_PROFILEXRC}/alias.rc"
 fi
 
 # }}}

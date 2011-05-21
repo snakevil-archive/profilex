@@ -1,12 +1,12 @@
-# ~/.local/ProfileX/myshrc.d/interactive.rc
+# ~/.local/ProfileX/lib/myshrc/interactive.rc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
 # {{{ Configs inputing behavior.
 
-[ -r "${HOME}/.local/ProfileX/inputrc" ] \
-  && export INPUTRC="${HOME}/.local/ProfileX/inputrc"
+[ -r "${_PROFILEX}/etc/inputrc" ] \
+  && export INPUTRC="${_PROFILEX}/etc/inputrc"
 
 # }}}
 

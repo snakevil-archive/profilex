@@ -1,4 +1,4 @@
-# ~/.local/ProfileX/prompt.d/exit.sh
+# ~/.local/ProfileX/share/prompt/exit.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

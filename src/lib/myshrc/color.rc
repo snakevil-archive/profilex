@@ -1,4 +1,4 @@
-# ~/.local/ProfileX/myshrc.d/colors.rc
+# ~/.local/ProfileX/lib/myshrc/colors
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
@@ -65,8 +65,8 @@ fi
 unset platform
 
 if which dircolors > /dev/null; then
-  if [ -r "${HOME}/.local/ProfileX/dircolors" ]; then
-    eval `dircolors -b "${HOME}/.local/ProfileX/dircolors"`
+  if [ -r "${_PROFILEX}/etc/dircolorsrc" ]; then
+    eval `dircolors -b "${_PROFILEX}/etc/dircolorsrc"`
   else
     eval `dircolors -b`
   fi

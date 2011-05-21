@@ -29,7 +29,7 @@ __PROFILEX_TRACE 'bashrc: 2) Interactive shell validated.'
 
 # {{{ Personalizes shell environment.
 
-. "${HOME}/.local/ProfileX/myshrc"
+. "${HOME}/.local/ProfileX/libexec/myshrc"
 
 # }}}
 
@@ -53,24 +53,24 @@ __PROFILEX_PROMPT() {
   _PROFILEX_EXIT=$?
   which sed > /dev/null || return 0
   local CBase="${CGray}"
-  for file in `'ls' "${HOME}/.local/ProfileX/prompt.d/"*".sh"`
+  for file in `'ls' "${_PROFILEX}/share/prompt/"*".sh"`
   do
     [ -r "${file}" ] && . "${file}"
   done
-  for file in `'ls' "${HOME}/.profilexrc/prompt.d/"*".sh" 2> /dev/null`
+  for file in `'ls' "${_PROFILEXRC}/prompt.d/"*".sh" 2> /dev/null`
   do
     [ -r "${file}" ] && . "${file}"
   done
-  local path="${HOME}/.profilexrc/prompt.title"
-  [ -r "${path}" ] || path="${HOME}/.local/ProfileX/prompt.title"
+  local path="${_PROFILEXRC}/prompt.title"
+  [ -r "${path}" ] || path="${_PROFILEX}/etc/prompt.title"
   local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' "${path}"`
   eval "title=\"${title}\""
   title=`echo "${title}" \
     | sed -e 's/\\\e\[[0-9;]*m//g'`
   echo -ne "\e]0;${title}\a"
   unset title
-  path="${HOME}/.profilexrc/prompt.ps1"
-  [ -r "${path}" ] || path="${HOME}/.local/ProfileX/prompt.ps1"
+  path="${_PROFILEXRC}/prompt.ps1"
+  [ -r "${path}" ] || path="${_PROFILEX}/etc/prompt.ps1"
   local prompt=`sed -e '86N;s/\\n/\\\n/g' \
     -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' "${path}"`
   eval "PS1=\"${prompt}\""

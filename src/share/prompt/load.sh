@@ -1,4 +1,4 @@
-# ~/.local/ProfileX/prompt.d/load.sh
+# ~/.local/ProfileX/share/prompt/load.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

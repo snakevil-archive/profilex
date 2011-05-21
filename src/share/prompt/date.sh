@@ -1,4 +1,4 @@
-# ~/.local/ProfileX/prompt.d/date.sh
+# ~/.local/ProfileX/share/prompt/date.sh
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.

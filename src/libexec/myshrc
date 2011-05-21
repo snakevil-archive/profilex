@@ -1,4 +1,4 @@
-# ~/.local/ProfileX/myshrc
+# ~/.local/ProfileX/libexec/myshrc
 #
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
@@ -9,9 +9,17 @@
 
 # }}}
 
+# {{{ Declares the basic paths.
+
+export _PROFILEX="${HOME}/.local/ProfileX"
+
+export _PROFILEXRC="${HOME}/.profilexrc"
+
+# }}}
+
 # {{{ Loads all other targeted behaviors.
 
-for file in `ls "${HOME}/.local/ProfileX/myshrc.d/"*".rc"`
+for file in `ls "${_PROFILEX}/lib/myshrc/"*".rc"`
 do
   [ -r "${file}" ] && . "${file}"
 done

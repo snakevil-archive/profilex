@@ -12,10 +12,7 @@
                                     -s-
 
 
-                                                         `--  .:-   ``  .-  ..-
-                                                         /os. /+s.  /+ :+  `h.`
-                                                         :/o: +/:/-`:/ +o-  y--
----------------------------------------------------------+o/--+/--/s+/-:s+:.+--
+--------------------------------------------------------------------------------
  BRIEF
 
 `ProfileX' is a powerful and beautiful toolkit for Bourne-compatible shells (sh,
@@ -24,10 +21,7 @@
 Bases on shell profile scripts.
 
 
-                                                 `         `   `  `      ``  ``
-                                                 y   :/ `/-:` +-` o:` o `o- -/.
-                                                 y   :/ o-   .h-` o-+-o  s. h:.
--------------------------------------------------s:/.:/`-o//-.s/-`s``/+`-o/`+o:`
+--------------------------------------------------------------------------------
  LICENSE
 
 This work is under the license CREATIVE COMMONS
@@ -38,10 +32,7 @@ You can found the License Deed at http://j.mp/lrLpYz
 For more detailed Legal Code, please visit http://j.mp/lK91eq
 
 
-                    `: .:  `. ./..--- ./`    /`   +   -/`   ---- -. `.-. `/` `-
-                    `y  y+-:/ /+ `:+`  o+-   s`   y    s+-  `+:` o- s.`o. s+:.o
-                     s  o -s- .y` -o``//-//: o..` y..`+/-//- //` +. o:.+` s -o/
----------------------/-:/--:--//--:/::/----/-///:-///::---:/-:/:-/:--//:--/--::.
+--------------------------------------------------------------------------------
  INSTALLATION
 
 a). Get the source code:
@@ -65,11 +56,8 @@ Opposites to the section b, to uninstall it, just using:
     make uninstall
 
 
-  `..   .` `-.     ..  ``  ``   ` ..     .    . `...` ..    ```` ``   `  `.   `
-  /+/: o-` -s+:   -o` +-:o `y/`-/ `s/`   s`  `y `.:o- `s/`  -+/. o- /:-o``y/``o
-  :/-` d-` -o+:-  `s.`y``s  o./o: -o:o:` s`   y .+:`` :o:o:` +-  +. y. o. o`/++
---//...+o/./+.-/s//s:./o+:.-o.-+::+---:o-o++/.o.oo++o:+---:o-/s:.+:.:++:--o.-/:.
- PERSONALIZATION
+--------------------------------------------------------------------------------
+ CUSTOMIZATION
 
 `ProfileX` currently supports customized prompting and aliases via preferences
 in the RC folder '$HOME/.profilexrc'. That folder would not be changed while
@@ -118,12 +106,65 @@ Notice: Once there have been any dissatisfied aliases from `ProfileX', you can
 `unalias' or override them in that file too.
 
 
-                                  `:-: `::/` //+.o. `+ s:o   o  ./-: `o  + .:+:`
-                                  s`   o- .o +:+``+/o` yoo`  y  h` `  h:-h   s
-                                  /+-:`.o:/. +.   .s   y `/+/s  /-:y  o  o  `y-
---------------------------------------------------:.--------:------..----------.
+--------------------------------------------------------------------------------
+ APPENDIX
+
+a). Improved commands:
+
+  1. in 'lib/myshrc/alias.rc':
+
+    cat     ( -sb )
+    cp      ( -ai )
+    df      ( -Th )
+    du      ( -ch --time )
+    free    ( -m )
+    mkdir   ( -p )
+    more    ( LESS )
+    mv      ( -i )
+    ps      ( -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args" )
+    rm      ( -i )
+
+  2. in 'lib/myshrc/color.rc':
+
+    diff    ( COLORDIFF )
+    egrep   ( --color=auto )
+    fgrep   ( --color=auto )
+    grep    ( --color=auto )
+    less    ( SOURCE-HIGHLIGHT )
+    ls      ( -F --color=auto )
+
+b). Replaced/Created aliases:
+
+  1. in 'lib/myshrc/alias.rc':
+
+    g       ( git )
+    ll      ( ls -hl )
+    la      ( ll -A )
+    own     ( chown -cRh USER:GROUP )
+    su      ( sudo -s )
+    v       ( vi )
+    vi      ( vim )
+
+  2. in 'lib/myshrc/color.rc':
+
+    ansicolors
+
+c). Created commands:
+
+  1. in folder 'bin':
+
+    x       - A powerful toolkit to quickly work with your most frequently used
+              directories.
+    xad     - Registers new directory.
+    xcd     - Changes CWD to some directory.
+    xls     - Lists all registered directories.
+    xrm     - Removes some directory.
+
+
+--------------------------------------------------------------------------------
  COPYRIGHT
 
 Copyright © 2010-2011 Snakevil Zen <zsnakevil@gmail.com>. RIGHTS RESERVED.
 
 Last-Modified in May 22nd 2011. Getting-Started in May 6th 2010.
+

@@ -14,6 +14,7 @@ case "${PWD}" in
     ;;
   * )
     homed=0
+    _PROFILEX_PWD="${PWD}"
     ;;
 esac
 

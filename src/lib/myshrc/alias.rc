@@ -7,16 +7,16 @@
 
 alias cat='cat -sb'
 
-which df > /dev/null && alias df='df -Th'
-which du > /dev/null && alias du='du -ch --time'
-which free > /dev/null && alias free='free -m'
+'which' df > /dev/null && alias df='df -Th'
+'which' du > /dev/null && alias du='du -ch --time'
+'which' free > /dev/null && alias free='free -m'
 
 alias la='ll -A'
 alias ll='ls -hl'
 
 alias more='less'
 
-which ps > /dev/null && \
+'which' ps > /dev/null && \
   alias ps='ps -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args"'
 
 # }}}
@@ -34,11 +34,11 @@ alias rm='rm -i'
 
 # {{{ Shortcuts for habits of cmds.
 
-which git > /dev/null && alias g='git'
+'which' git > /dev/null && alias g='git'
 
-which sudo > /dev/null && alias su='sudo -s'
+'which' sudo > /dev/null && alias su='sudo -s'
 
-which vim > /dev/null && alias vi='vim'
+'which' vim > /dev/null && alias vi='vim'
 alias v='vi'
 
 # }}}
@@ -47,7 +47,7 @@ alias v='vi'
 
 USERx=$USER
 [ -z "${SUDO_USER}" ] || USERx=$SUDO_USER
-GROUPx=`id -gn "${USERx}"`
+GROUPx=`'id' -gn "${USERx}"`
 alias own="chown -cRh ${USERx}:${GROUPx}"
 unset USERx
 unset GROUPx

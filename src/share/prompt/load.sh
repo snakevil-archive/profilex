@@ -3,25 +3,24 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-which awk sed uptime > /dev/null && {
-  _PROFILEX_LOAD=`uptime \
-    | awk -F'load average' '{print $2}' \
-    | awk '{print $2}'`
-  _PROFILEX_LOAD="${_PROFILEX_LOAD:0:4}"
-  if which expr > /dev/null
-  then
-    if [ 1 -eq `expr "${_PROFILEX_LOAD}" \> 1` ]
-    then
-      _PROFILEX_LOAD="${CMaroon}${_PROFILEX_LOAD}"
-    elif [ 1 -eq `expr "${_PROFILEX_LOAD}" \> 0.1` ]
-    then
-      _PROFILEX_LOAD="${COlive}${_PROFILEX_LOAD}"
-    else
+'which' awk sed uptime > /dev/null && {
+  _PROFILEX_LOAD=`'uptime' \
+    | 'awk' -F'load average' '{print $2}' \
+    | 'awk' -F',' '{print $1}' \
+    | 'awk' '{print $2}'`
+  'which' expr > /dev/null && {
+    'expr' "${_PROFILEX_LOAD}" \> 0.1 > /dev/null && {
+      'expr' "${_PROFILEX_LOAD}" \> 1 > /dev/null && {
+        _PROFILEX_LOAD="${CMaroon}${_PROFILEX_LOAD}"
+      } || {
+        _PROFILEX_LOAD="${COlive}${_PROFILEX_LOAD}"
+      }
+    } || {
       _PROFILEX_LOAD="${CGreen}${_PROFILEX_LOAD}"
-    fi
-  else
+    }
+  } || {
     _PROFILEX_LOAD="${CSilver}${_PROFILEX_LOAD}"
-  fi
+  }
   _PROFILEX_LOAD=" L${_PROFILEX_LOAD}"
 }
 

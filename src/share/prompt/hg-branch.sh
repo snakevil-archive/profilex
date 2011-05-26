@@ -3,8 +3,8 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-which hg > /dev/null && {
-  _PROFILEX_HG_BRANCH=`hg branch 2> /dev/null`
+'which' hg > /dev/null && {
+  _PROFILEX_HG_BRANCH=`'hg' branch 2> /dev/null`
   [ -z "${_PROFILEX_HG_BRANCH}" ] && return 0
   _PROFILEX_HG_BRANCH="${CBlue}(${CBase}h${CBlue}${_PROFILEX_HG_BRANCH})"
 }

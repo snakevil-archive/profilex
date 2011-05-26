@@ -5,11 +5,11 @@
 
 [ -z "${_PROFILEX_IP}" ] && {
   _PROFILEX_IP='.0.1'
-  which awk head ifconfig sed > /dev/null \
-    && _PROFILEX_IP=`ifconfig \
-      | awk '/inet /&&!/127\./{sub("addr:","");print $2}' \
-      | head -n1 \
-      | sed -e 's/^[^\.]*\.[^\.]*\(\.\)/\1/'`
+  'which' awk head ifconfig sed > /dev/null \
+    && _PROFILEX_IP=`'ifconfig' \
+      | 'awk' '/inet /&&!/127\./{sub("addr:","");print $2}' \
+      | 'head' -n1 \
+      | 'sed' -e 's/^[^\.]*\.[^\.]*\(\.\)/\1/'`
   _PROFILEX_IP="${CPurple}${_PROFILEX_IP}"
 }
 

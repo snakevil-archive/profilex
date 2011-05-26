@@ -3,9 +3,9 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-which wc > /dev/null && {
-  _PROFILEX_JOBS=`jobs \
-    | wc -l`
+'which' wc > /dev/null && {
+  _PROFILEX_JOBS=`'jobs' \
+    | 'wc' -l`
   if [ 0 -eq $_PROFILEX_JOBS ]
   then
     _PROFILEX_JOBS=''

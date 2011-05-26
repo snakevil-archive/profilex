@@ -6,11 +6,13 @@
 local homed
 local depth
 
+PWD=`pwd`
+
 case "${PWD}" in
   "${HOME}"* )
     homed=1
-    _PROFILEX_PWD=`echo "${PWD}" \
-      | sed -e "s@^${HOME}@@"`
+    _PROFILEX_PWD=`'echo' "${PWD}" \
+      | 'sed' -e "s@^${HOME}@@"`
     ;;
   * )
     homed=0
@@ -18,21 +20,21 @@ case "${PWD}" in
     ;;
 esac
 
-which awk expr > /dev/null && {
-  depth=`echo -n "${_PROFILEX_PWD}" \
-    | awk -F'/' 'END{print NF-1}'`
+'which' awk expr > /dev/null && {
+  depth=`'echo' -n "${_PROFILEX_PWD}" \
+    | 'awk' -F'/' 'END{print NF-1}'`
   [ 3 -lt $depth ] && {
     local line
     local index=0
-    _PROFILEX_PWD=`echo -n "${_PROFILEX_PWD}" \
-      | awk 'BEGIN{RS="/"}{print}' \
-      | while read line
+    _PROFILEX_PWD=`'echo' -n "${_PROFILEX_PWD}" \
+      | 'awk' 'BEGIN{RS="/"}{print}' \
+      | while 'read' line
         do
-          [ 1 -lt $index -a $index -lt $(expr $depth - 1) ] && {
+          [ 1 -lt $index -a $index -lt $('expr' $depth - 1) ] && {
             line="${CUnder}${CYellow}${line:0:1}${COlive}"
           }
-          [ 0 -eq $index ] || echo -n "/${line}"
-          index=$(expr $index + 1)
+          [ 0 -eq $index ] || 'echo' -n "/${line}"
+          index=$('expr' $index + 1)
         done`
     unset line
     unset index

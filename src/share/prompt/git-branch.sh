@@ -3,10 +3,10 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-which git > /dev/null && {
-  _PROFILEX_GIT_BRANCH=`git symbolic-ref HEAD 2> /dev/null`
+'which' git awk > /dev/null && {
+  _PROFILEX_GIT_BRANCH=`'git' symbolic-ref HEAD 2> /dev/null \
+    | 'awk' -F'/' '{print $3}'`
   [ -z "${_PROFILEX_GIT_BRANCH}" ] && return 0
-  _PROFILEX_GIT_BRANCH="${_PROFILEX_GIT_BRANCH#refs/heads/}"
   _PROFILEX_GIT_BRANCH="${CBlue}(${CBase}g${CBlue}${_PROFILEX_GIT_BRANCH})"
 }
 

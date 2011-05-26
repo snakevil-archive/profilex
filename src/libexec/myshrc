@@ -19,7 +19,7 @@ export _PROFILEXRC="${HOME}/.profilexrc"
 
 # {{{ Loads all other targeted behaviors.
 
-for file in `ls "${_PROFILEX}/lib/myshrc/"*".rc"`
+for file in `'ls' "${_PROFILEX}/lib/myshrc/"*".rc"`
 do
   [ -r "${file}" ] && . "${file}"
 done

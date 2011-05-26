@@ -12,7 +12,7 @@ export PROFILEX_DBG=0
 
 __PROFILEX_TRACE() {
   [ "x1" = "x${PROFILEX_DBG}" ] || return 0
-  echo 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
+  'echo' 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
 }
 
 # ]}}
@@ -47,7 +47,7 @@ then
 fi
 
 [ "bash" = "${PROFILEX_SH}" ] || {
-  PROFILEX_SH=`ps | grep $$ | awk '{print $4}'`
+  PROFILEX_SH=`'ps' | 'grep' $$ | 'awk' '{print $4}'`
   [ "sh" = "${PROFILEX_SH}" -a -n "${KSH_VERSION}" ] && \
     PROFILEX_SH="ksh"
 }

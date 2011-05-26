@@ -10,7 +10,7 @@
 
 __PROFILEX_TRACE() {
   [ "x1" = "x${PROFILEX_DBG}" ] || return 0
-  echo 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
+  'echo' 'P.'$$': '$* >> "${HOME}/profilex.trace-log"
 }
 
 # }}}
@@ -51,7 +51,7 @@ __PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
 
 __PROFILEX_PROMPT() {
   _PROFILEX_EXIT=$?
-  which sed > /dev/null || return 0
+  'which' sed > /dev/null || return 0
   local CBase="${CGray}"
   for file in `'ls' "${_PROFILEX}/share/prompt/"*".sh"`
   do
@@ -63,19 +63,19 @@ __PROFILEX_PROMPT() {
   done
   local path="${_PROFILEXRC}/prompt.title"
   [ -r "${path}" ] || path="${_PROFILEX}/etc/prompt.title"
-  local title=`sed -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' "${path}"`
+  local title=`'sed' -e 's/%\([^%]*\)%/${_PROFILEX_\1}/g' "${path}"`
   eval "title=\"${title}\""
-  title=`echo "${title}" \
-    | sed -e 's/\\\e\[[0-9;]*m//g'`
-  echo -ne "\e]0;${title}\a"
+  title=`'echo' "${title}" \
+    | 'sed' -e 's/\\\e\[[0-9;]*m//g'`
+  'echo' -ne "\e]0;${title}\a"
   unset title
   path="${_PROFILEXRC}/prompt.ps1"
   [ -r "${path}" ] || path="${_PROFILEX}/etc/prompt.ps1"
-  local prompt=`sed -e '86N;s/\\n/\\\n/g' \
+  local prompt=`'sed' -e '86N;s/\\n/\\\n/g' \
     -e 's/%\([^%]*\)%/${CBase}${_PROFILEX_\1}${CNone}/g' "${path}"`
   eval "PS1=\"${prompt}\""
-  PS1=`echo -n "${PS1}" \
-    | sed -e 's/\(\\\e\[[0-9;]*m\)/\\\[\1\\\]/g'`
+  PS1=`'echo' -n "${PS1}" \
+    | 'sed' -e 's/\(\\\e\[[0-9;]*m\)/\\\[\1\\\]/g'`
   export PS1
   unset prompt
 }

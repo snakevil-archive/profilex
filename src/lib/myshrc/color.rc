@@ -5,15 +5,15 @@
 
 # {{{ Highlights the DIFF result if possible.
 
-which colordiff > /dev/null && alias diff='colordiff -u' \
+'which' colordiff > /dev/null && alias diff='colordiff -u' \
   || alias diff='diff -u'
 
 # }}}
 
 # {{{ Highlights the GREP result.
 
-which egrep > /dev/null && alias egrep='egrep --color=auto'
-which fgrep > /dev/null && alias fgrep='fgrep --color=auto'
+'which' egrep > /dev/null && alias egrep='egrep --color=auto'
+'which' fgrep > /dev/null && alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 
 # }}}
@@ -36,7 +36,7 @@ unset LESSOPENx
 
 # {{{ Highlights the LS result.
 
-case `uname -s` in
+case `'uname' -s` in
   Linux )
     platform="linux"
     ;;
@@ -50,7 +50,7 @@ case `uname -s` in
     platform="unknown"
     ;;
 esac
-[ 0 -lt `ls --version 2> /dev/null | grep GNU | wc -l` ] \
+[ 0 -lt `'ls' --version 2> /dev/null | 'grep' GNU | 'wc' -l` ] \
   && platform="linux"
 
 if [ "bsd" = "${platform}" ]; then
@@ -64,11 +64,11 @@ elif [ "linux" = "${platform}" ]; then
 fi
 unset platform
 
-if which dircolors > /dev/null; then
+if 'which' dircolors > /dev/null; then
   if [ -r "${_PROFILEX}/etc/dircolorsrc" ]; then
-    eval `dircolors -b "${_PROFILEX}/etc/dircolorsrc"`
+    eval `'dircolors' -b "${_PROFILEX}/etc/dircolorsrc"`
   else
-    eval `dircolors -b`
+    eval `'dircolors' -b`
   fi
 fi
 

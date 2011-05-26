@@ -43,6 +43,8 @@ export HISTIGNORE="ls:ll:la:fg"
 export HISTSIZE=2010
 export HISTTIMEFORMAT="%F %T "
 
+shopt -s histappend 
+
 # }}}
 
 __PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
@@ -51,6 +53,7 @@ __PROFILEX_TRACE 'bashrc: 4) Historial behavior configed.'
 
 __PROFILEX_PROMPT() {
   _PROFILEX_EXIT=$?
+  'history' -a
   'which' sed > /dev/null || return 0
   local CBase="${CGray}"
   for file in `'ls' "${_PROFILEX}/share/prompt/"*".sh"`

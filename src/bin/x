@@ -1,0 +1,574 @@
+#!/bin/sh
+#
+# A powerful toolkit to quickly work with your most frequently used
+# directories.
+#
+# AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
+# COPYRIGHT  © 2011 Snakevil.in.
+
+'which' basename printf dirname cat rm touch expr awk > /dev/null 2>&1 \
+  || exit 1
+
+'which' pwd grep tr > /dev/null 2>&1 \
+  || exit 1
+
+# {{{ Defines common used error messages.
+
+readonly E_ACCESS_DENIED='RC file access denied!'
+readonly E_WRITE_DENIED='RC file cannot be written!'
+readonly E_ALIAS_REQUIRED='The alias of some path should be given.'
+readonly E_NO_PATH='Oops... No path had been registered!'
+E_ALIAS_REGISTERED="You cannot use alias '%s' for the same directory again"
+readonly E_ALIAS_REGISTERED="${E_ALIAS_REGISTERED} and again."
+readonly E_ALIAS_REPLACED="OK! Alias '%s' be replaced as '%s'."
+readonly E_ALIAS_ABORTED='OK! Aborted.'
+readonly E_ALIAS_UNKNOWN="Oops... The alias '%s' has never seen before!"
+readonly E_ALIAS_REMOVED="OK! Alias '%s' be terminated."
+readonly E_ALIAS_ADDED="OK! Alias '%s' can be used from now on."
+E_ALIAS_TOOLONG="Alias should be shorten than 9 chars. %d chars were"
+readonly E_ALIAS_TOOLONG="${E_ALIAS_TOOLONG} given!"
+readonly E_ALIAS_INVALIAD="Sorry... Only 'a-z0-9_' and '-' can be used."
+
+# }}}
+
+# {{{ Defines common used resource messages.
+
+readonly M_CONFIRM=' (Yes/No) ? '
+readonly M_ALIAS_USED="Alias '%s' has been used for '%s',"
+readonly M_ALIAS_OVERWRITE='Overwrite it'
+readonly M_ALIAS_TOTAL='Total %d'
+readonly M_ALIAS_REMOVE='Really drop it'
+
+# }}}
+
+# {{{ Defines common used function - X_debug()
+
+X_debug() {
+  [ -z "${DeBuG}" ] && return 0
+
+  'echo' -n `'awk' -v'times='$X_dbglvl 'BEGIN{OFS=">>";NF=1+times;print}'`
+  'echo' '> '$*
+}
+
+# }}}
+
+# {{{ Defines common used function - X_debug_in()
+
+X_debug_in() {
+  X_dbglvl=`'expr' $X_dbglvl + 1`
+  X_debug $*' BEGAN...'
+}
+
+# }}}
+
+# {{{ Defines common used function - X_debug_out()
+
+X_debug_out() {
+  X_debug 'DONE.'
+  X_dbglvl=`'expr' $X_dbglvl - 1`
+}
+
+# }}}
+
+# {{{ Defines common used function - X_error()
+
+X_error() {
+  [ 0 -eq $# ] && return 0
+
+  X_dbglvl=`'expr' $X_dbglvl + 1`
+
+  local code=$1
+  shift
+
+  [ 0 -lt $# ] && {
+    local mesg="$1"
+    shift
+
+    [ 0 -eq $code ] && {
+      mesg="X: ${mesg}"
+      'printf' "${mesg}" $*
+      'echo'
+    } || {
+      mesg="X: ERROR: ${mesg}"
+      'printf' "${mesg}" $* >&2
+      'echo' >&2
+    }
+  }
+
+  X_dbglvl=`'expr' $X_dbglvl - 1`
+
+  [ 0 -ne $code ] && exit $code
+}
+
+# }}}
+
+# {{{ Defines common used function - X_read_rc()
+
+X_read_rc() {
+  X_debug_in 'X_read_rc'
+
+  pathlist=`'cat' "${rcfile}" 2> /dev/null`
+  [ -z "${pathlist}" ] && pathcnt=0 \
+    || pathcnt=`'echo' "${pathlist}" | 'wc' -l`
+
+  X_debug '..Paths <pathlist>: '"${pathlist}"
+  X_debug '..Paths amount <pathcnt>: '$pathcnt
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Defines common used function - X_write_rc()
+
+X_write_rc() {
+  X_debug_in 'X_write_rc'
+
+  [ -z "${pathlist}" ] && {
+    'rm' -f "${rcfile}"
+    'touch' "${rcfile}"
+  } || {
+    'echo' "${pathlist}" > "${rcfile}"
+  }
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Defines common used function - X_search()
+
+X_search() {
+  X_debug_in 'X_search'
+
+  [ 1 -eq $# ] || {
+    pathmatch=
+
+    X_debug '..Required parameter was missing.'
+    X_debug_out
+
+    return 1
+  }
+
+  X_debug '..Testing alias <>: '"$1"
+
+  pathmatch=`'echo' "${pathlist}" \
+    | 'awk' -F"${fldsep}" -v"alias=$1" ' \
+      alias==$1 { \
+        print $2 \
+      }'`
+
+  X_debug '..Matched path <pathmatch>: '"${pathmatch}"
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Defines common used function - X_confirm()
+
+X_confirm() {
+  X_debug_in 'X_confirm'
+
+  'echo' -n "$*"
+
+  local answer
+  while [ 1 ]
+  do
+    'read' -p "${M_CONFIRM}" answer
+    case "${answer}" in
+      'y'|'Y'|'yes'|'Yes'|'YES' )
+
+        X_debug '..YES chosen.'
+        X_debug_out
+
+        return 0
+        ;;
+      'n'|'N'|'no'|'No'|'NO' )
+
+        X_debug '..NO chosen.'
+        X_debug_out
+
+        return 1
+        ;;
+    esac
+
+    X_debug '..Invalid choice, loop on.'
+
+  done
+}
+
+# }}}
+
+# {{{ Defines common used function - X_help_tail()
+
+X_help_tail() {
+  X_debug_in 'X_help_tail'
+
+  'cat' << X_HELP_TAIL
+
+Wrote and maintained by Snakevil Zen <zsnakevil@gmail.com>, under
+ \`CreativeCommons Attribution-NonCommercial-ShareAlike 3.0 Unported'.
+X_HELP_TAIL
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Add - Xadd()
+
+Xadd() {
+  X_debug_in 'Xadd'
+
+  X_debug '..Length <>: '`'echo' "${majopt}" | 'wc' -c`
+
+  [ 8 -lt `'echo' "${majopt}" | 'wc' -c` ] && {
+    X_debug_out
+
+    X_error 7 "${E_ALIAS_TOOLONG}"
+  }
+
+  local illchrs=`'echo' -n "${majopt}" | 'tr' -d '[:alnum:]-_'`
+  X_debug '..Illegal chars <>: '"${illchrs}"
+
+  [ -n "${illchrs}" ] && {
+    X_debug_out
+
+    X_error 8 "${E_ALIAS_INVALIAD}"
+  }
+
+  X_read_rc
+
+  X_search "${majopt}"
+
+  PWD=`'pwd'`
+  local newitem="${majopt}${fldsep}${PWD}"
+
+  [ -n "${pathmatch}" ] && {
+    [ "${PWD}" = "${pathmatch}" ] && {
+      X_debug_out
+
+      X_error 6 "${E_ALIAS_REGISTERED}" "${majopt}"
+    }
+
+    'printf' "${M_ALIAS_USED}\n" "${majopt}" "${pathmatch}"
+    X_confirm "${M_ALIAS_OVERWRITE}"
+
+    [ 0 -eq $? ] && {
+      pathlist=`'echo' "${pathlist}" \
+        | 'grep' -v "${majopt}${fldsep}${pathmatch}"; \
+        'echo' "${newitem}"`
+      X_write_rc
+
+      X_error 0 "${E_ALIAS_REPLACED}" "${majopt}" "${PWD}"
+    } || X_error 0 "${E_ALIAS_ABORTED}"
+
+    X_debug_out
+
+    return 0
+  }
+
+  [ 0 -eq $pathcnt ] && pathlist="${newitem}" \
+    || pathlist=`'echo' "${pathlist}"; 'echo' "${newitem}"`
+  X_write_rc
+  X_error 0 "${E_ALIAS_ADDED}" "${majopt}"
+
+  X_debug_out
+
+  return 0
+}
+
+# }}}
+
+# {{{ Implies feature Help Add - Xhelp_add()
+
+Xhelp_add() {
+  X_debug_in 'Xhelp_add'
+
+  'cat' << XHELP_ADD
+Binds an alias onto current working directory.
+
+  Usage:
+    xad [OPTIONS...] <ALIAS>
+
+  Options:
+    -f        TODO. Keeps silence without prompting on used aliases.
+XHELP_ADD
+
+  X_help_tail
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Help Main - Xhelp_main()
+
+Xhelp_main() {
+  X_debug_in 'Xhelp_main'
+
+  'cat' << XHELP_MAIN
+\`X' is a series of severial powerful utilitties to speed up your works on
+ changing directories.
+
+Most frequently used directories can be remembered, and then be used, with
+ an unique alias as you wish.
+
+  Usage:
+    \`xad'    Remembers current working directory with an alias.
+    \`xcd'    Goes to some remembered directory.
+    \`xls'    Lists all remembered aliases and directories.
+    \`xrm'    Forgets some exist directory.
+
+For more detailed information, try \`--help' on specific commands.
+XHELP_MAIN
+
+  X_help_tail
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Help Ls - Xhelp_ls()
+
+Xhelp_ls() {
+  X_debug_in 'Xhelp_ls'
+
+  'cat' << XHELP_LS
+Lists all remembered directories and appropriate aliases.
+
+  Usage:
+    xls
+XHELP_LS
+
+  X_help_tail
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Help Query - Xhelp_query()
+
+Xhelp_query() {
+  X_debug_in 'Xhelp_query'
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Help Rm - Xhelp_rm()
+
+Xhelp_rm() {
+  X_debug_in 'Xhelp_rm'
+
+  'cat' << XHELP_ADD
+Releases a used alias from the appropriate directory.
+
+  Usage:
+    xrm [OPTIONS...] <ALIAS>
+
+  Options:
+    -f        TODO. Forces to remove without prompting.
+XHELP_ADD
+
+  X_help_tail
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Main - Xmain()
+
+Xmain() {
+  X_debug_in 'Xmain'
+
+  [ -z "${majopt}" ] && Xls || Xquery
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Ls - Xls()
+
+Xls() {
+  X_debug_in 'Xls'
+
+  X_read_rc
+
+  [ 0 -eq $pathcnt ] && {
+    X_debug_out
+
+    X_error 5 "${E_NO_PATH}"
+  }
+
+  'printf' "${M_ALIAS_TOTAL}\n" $pathcnt
+  'echo' "${pathlist}" \
+    | 'awk' -F"${fldsep}" ' \
+      { \
+        printf "% 8s\t", $1; \
+        print $2; \
+      }'
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Query - Xquery()
+
+Xquery() {
+  X_debug_in 'Xquery'
+
+  X_read_rc
+
+  X_search "${majopt}"
+
+  [ -z "${pathmatch}" ] && {
+    X_debug_out
+
+    X_error 7 "${E_ALIAS_UNKNOWN}" "${majopt}"
+  }
+
+  'echo' "${pathmatch}"
+
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Implies feature Rm - Xrm()
+
+Xrm() {
+  X_debug_in 'Xrm'
+
+  X_read_rc
+
+  X_search "${majopt}"
+
+  [ -z "${pathmatch}" ] && {
+    X_debug_out
+
+    X_error 7 "${E_ALIAS_UNKNOWN}" "${majopt}"
+  }
+
+  'printf' "${M_ALIAS_USED}\n" "${majopt}" "${pathmatch}"
+  X_confirm "${M_ALIAS_REMOVE}"
+
+  [ 0 -eq $? ] && {
+    pathlist=`'echo' "${pathlist}" \
+      | 'grep' -v "${majopt}${fldsep}${pathmatch}"`
+    X_write_rc
+    X_error 0 "${E_ALIAS_REMOVED}" "${majopt}"
+
+    X_debug_out
+
+    return 0
+  }
+
+  X_error 0 "${E_ALIAS_ABORTED}"
+
+  X_debug_out
+
+  return 0
+}
+
+# }}}
+
+# {{{ Configs the RC file.
+
+X_debug 'Configs the RC file...'
+
+[ -n "${_PROFILEXRC}" ] && {
+  rcfile="${_PROFILEXRC}/xrc"
+} || {
+  rcfile="${HOME}/.xrc"
+}
+
+X_debug '..RC file <rcfile>: '"${rcfile}"
+
+[ -e "${rcfile}" ] && {
+  [ -f "${rcfile}" -a -r "${rcfile}" ] || X_error 2 "${E_ACCESS_DENIED}"
+  [ -w "${rcfile}" ] || X_error 3 "${E_WRITE_DENIED}"
+} || {
+  [ -w `'dirname' "${rcfile}"` ] || X_error 3 "${E_WRITE_DENIED}"
+}
+
+X_debug 'DONE.'
+
+# }}}
+
+# {{{ Configs the field-separator.
+
+fldsep='//'
+
+# }}}
+
+# {{{ Detects sub-command and option.
+
+X_debug 'Detects sub-command and option...'
+
+case `'basename' $0` in
+  'xad' )
+    subcmd='add'
+    ;;
+  'xls' )
+    subcmd='ls'
+    ;;
+  'xquery' )
+    subcmd='query'
+    ;;
+  'xrm' )
+    subcmd='rm'
+    ;;
+  'x' )
+    subcmd='main'
+    ;;
+  * )
+    subcmd='help'
+    ;;
+esac
+majopt="$1"
+
+X_debug '..Original <subcmd>: '$subcmd
+X_debug '..Original <majopt>: '"${majopt}"
+
+[ '--help' = "${majopt}" -o '-h' = "${majopt}" ] && {
+  majopt=$subcmd
+  subcmd='help'
+  [ $subcmd = $majopt ] && majopt=
+}
+
+X_debug '..Parsed <subcmd>: '$subcmd
+X_debug '..Parsed <majopt>: '"${majopt}"
+X_debug 'DONE.'
+
+# }}}
+
+# {{{ Routes to the corresponding feature.
+
+X_debug 'Routes to the corresponding feature...'
+
+[ 'add' = $subcmd -o 'query' = $subcmd -o 'rm' = $subcmd ] \
+  && [ -z "${majopt}" ] \
+  && X_error 4 "${E_ALIAS_REQUIRED}"
+
+case $subcmd in
+  'help' )
+    X_debug 'DONE: Xhelp_'$majopt
+    "Xhelp_${majopt}"
+    ;;
+  * )
+    X_debug 'DONE: X'$subcmd
+    "X${subcmd}"
+    ;;
+esac
+
+exit 0
+
+# }}}
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

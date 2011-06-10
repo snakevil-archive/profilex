@@ -3,7 +3,7 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
-PROFILES = bash_profile bashrc profile
+PROFILES = bash_profile bashrc profile vimrc
 
 PREFIX = $(HOME)
 PROFILEX = $(PREFIX)/.local/ProfileX

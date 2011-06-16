@@ -92,13 +92,12 @@ X_error() {
 
     [ 0 -eq $code ] && {
       mesg="X: ${mesg}"
-      'printf' "${mesg}" $@
-      $ECHO
     } || {
       mesg="X: ERROR: ${mesg}"
-      'printf' "${mesg}" $@ >&2
-      $ECHO >&2
     }
+
+    'printf' "${mesg}" $@ >&2
+    $ECHO >&2
   }
 
   [ 0 -ne $code ] && exit $code

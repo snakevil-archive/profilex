@@ -3,9 +3,29 @@
 # AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
 # COPYRIGHT  © 2011 Snakevil.in.
 
+PATH="${_PROFILEX}/bin:${PATH}"
 [ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
 [ -d "${HOME}/sbin" ] && PATH="${HOME}/sbin:${PATH}"
-export PATH="${_PROFILEX}/bin:${PATH}"
+export PATH
+
+for mandir in "${_PROFILEX}/share/man" "${HOME}/share/man"
+do
+  [ -d "${mandir}" ] && {
+    [ -z "${MANPATH}" ] && MANPATH=`'man' -w`
+    export MANPATH="${_PROFILEX}/share/man:${MANPATH}"
+  }
+done
+
+for infodir in "${_PROFILEX}/share/info" "${HOME}/share/info"
+do
+  [ -d "${infodir}" ] && {
+    [ -z "${INFOPATH}" ] && {
+      'info' -d "${infodir}"
+    } || {
+      export INFOPATH="${infodir}:${INFOPATH}"
+    }
+  }
+done
 
 # vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
 # vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

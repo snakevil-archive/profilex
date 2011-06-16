@@ -1,16 +1,16 @@
-
-
-                                      .+ooy
-    `.---/:.`                       `ym+``.        :+               .`    -h/
-  -so+sooyymd                       oMh     hh+   `Mm              `dN:  -NN+
-  +m/os `-/hy`--.`-/-`   .:-.``     sMd     ++-   /Mh      `...-.   `sNosNh:
-  `.-Nmyhy+/` hNmdhhmo -hmy+oyhy-` .hMMhhs/-ms    /My    `:dy+//h+    +MMs`
-    :My-.     `sMs` .` mN-   `.dNo:ydmMs+../Ms    /Md    /Mdssyhy/   `hNNN/
-    -My        /My    `mN+:-.:hms````hM/   /Mh-:+`+MN/::-`hNmho-```  sd-.hNs`
-    .dm`       :No     `.+ss/oo:     yM-   `/yhs/ -oshho` `:oydyyyh. /.  `sd/
-     ``         `                    hN-      `               ` ```        `
-                                    -s-
-
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMNy+-.   `-+hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMdo-`  `-sMMMMMMN. h
+MMm/ `/ydm++ds. /MMMMMMMMMMMMMMMMMMMN+/MMMMMMMMMMo/NMMMMMMMm: .odNNh. /MMMm+` /N
+My `sMMMN- +MMm  dMMMMMMMMMMMMMMMMMN- oMMMMy+dMM/ /MMMMMMMm` oMMMMMMm  dh: `+mMM
+N  yMMMN- /MMM+ .s :NMMMMMMmmMMMNNm: /NNMMN//dM+ :MMMNdmMMs .MMMMMMMM/   -yMMMMM
+N` sMMM: :ms+` /s `` -MMd: .``sN-.   ...+d``NMo :MN+.`-sMMm` +NMMMMm+`  yMMMMMMM
+Md- -M: :Mh/+ymMNyy- +My `hMs -MM/ ` /MMd``dMo -NM+ :ooMMMMmsoNMMh: `o: +MMMMMMM
+MMMNN/ -NMMMMMMMy. /mMm` sMm. sM+ :m  Nm``dMs -NNs. -+hNyomMMMNs. -yMMd `NMMMMMM
+MMMM+ -NMMMMMMMN  :o/. ` -+``sMo :Mh `M/ ./`  ::   oo/- -oNMMy` /dMMMMM: oMMMMMM
+MMMMyoNMMMMMMMMMdsooydMMyoohNMo -Nm` yMmsosddooymdoooydMMMMMy `dMMMMMMMmohMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMy .mo``yMMMMMMMMMMMMMMMMMMMMMMMh/hMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMh`  -oNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMSantaMFeMLETMonMMacMOSMX
 
 --------------------------------------------------------------------------------
  BRIEF
@@ -113,9 +113,11 @@ Notice: Once there have been any dissatisfied aliases from `ProfileX', you can
 a). Aliases:
 
     g     =   git
+    h     =   hg
     la    =   ls -A
     ll    =   ls -hl
     own   =   chown -cRh <USER>:<GROUP>
+    s     =   svn
     su    =   sudo -s
     v     =   vi
     vi    =   vim

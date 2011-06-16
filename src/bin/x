@@ -416,7 +416,7 @@ Xls() {
   $ECHO "${pathlist}" \
     | 'awk' -F"${fldsep}" ' \
       { \
-        printf "% 8s\t", $1; \
+        printf "% 9s    ", $1; \
         print $2; \
       }'
 

@@ -34,6 +34,8 @@ readonly E_ALIAS_ADDED="OK! Alias '%s' can be used from now on."
 E_ALIAS_TOOLONG="Alias should be shorten than 9 chars. %d chars were"
 readonly E_ALIAS_TOOLONG="${E_ALIAS_TOOLONG} given!"
 readonly E_ALIAS_INVALIAD="Sorry... Only 'a-z0-9_' and '-' can be used."
+readonly E_PATH_UNREGISTERED="CWD has not been registered yet."
+readonly E_PATH_REGISTERED="CWD has been registered as '%s'."
 
 # }}}
 
@@ -81,8 +83,6 @@ X_debug_out() {
 X_error() {
   [ 0 -eq $# ] && return 0
 
-  X_dbglvl=`'expr' $X_dbglvl + 1`
-
   local code=$1
   shift
 
@@ -92,16 +92,14 @@ X_error() {
 
     [ 0 -eq $code ] && {
       mesg="X: ${mesg}"
-      'printf' "${mesg}" $*
+      'printf' "${mesg}" $@
       $ECHO
     } || {
       mesg="X: ERROR: ${mesg}"
-      'printf' "${mesg}" $* >&2
+      'printf' "${mesg}" $@ >&2
       $ECHO >&2
     }
   }
-
-  X_dbglvl=`'expr' $X_dbglvl - 1`
 
   [ 0 -ne $code ] && exit $code
 }
@@ -164,6 +162,34 @@ X_search() {
       }'`
 
   X_debug '..Matched path <pathmatch>: '"${pathmatch}"
+  X_debug_out
+}
+
+# }}}
+
+# {{{ Defines common used function - X_reverse_search()
+
+X_reverse_search() {
+  X_debug_in 'X_reverse_search'
+
+  [ 1 -eq $# ] || {
+    aliasmatch=
+
+    X_debug '..Required parameter was missing.'
+    X_debug_out
+
+    return 1
+  }
+
+  X_debug '..Testing alias <>: '"$1"
+
+  aliasmatch=`$ECHO "${pathlist}" \
+    | 'awk' -F"${fldsep}" -v"path=$1" ' \
+      path==$2 { \
+        print $1 \
+      }'`
+
+  X_debug '..Matched path <aliasmatch>: '"${aliasmatch}"
   X_debug_out
 }
 
@@ -246,9 +272,16 @@ Xadd() {
 
   X_read_rc
 
+  X_reverse_search "${PWD}"
+
+  [ -n "${aliasmatch}" ] && {
+    X_debug_out
+
+    X_error 9 "${E_PATH_REGISTERED}" "${aliasmatch}"
+  }
+
   X_search "${majopt}"
 
-  PWD=`'pwd'`
   local newitem="${majopt}${fldsep}${PWD}"
 
   [ -n "${pathmatch}" ] && {
@@ -432,6 +465,24 @@ Xquery() {
 
   X_read_rc
 
+  [ '-R' = "${majopt}" -o '-r' = "${majopt}" ] && {
+    X_reverse_search "${PWD}"
+
+    [ -z "${aliasmatch}" ] && {
+      X_error 0 "${E_PATH_UNREGISTERED}"
+
+      X_debug_out
+
+      return 0
+    }
+
+    $ECHO "${aliasmatch}"
+
+    X_debug_out
+
+    return 0
+  }
+
   X_search "${majopt}"
 
   [ -z "${pathmatch}" ] && {
@@ -518,6 +569,9 @@ fldsep='//'
 
 X_debug 'Detects sub-command and option...'
 
+PWD=`'pwd'`
+X_debug "CWD <PWD>:{$PWD}"
+
 case `'basename' $0` in
   'xad' )
     subcmd='add'
@@ -539,6 +593,7 @@ case `'basename' $0` in
     ;;
 esac
 majopt="$1"
+shift
 
 X_debug '..Original <subcmd>: '$subcmd
 X_debug '..Original <majopt>: '"${majopt}"
@@ -569,8 +624,8 @@ case $subcmd in
     "Xhelp_${majopt}"
     ;;
   * )
-    X_debug 'DONE: X'$subcmd
-    "X${subcmd}"
+    X_debug 'DONE: X'$subcmd $@
+    "X${subcmd}" $@
     ;;
 esac
 

@@ -37,13 +37,13 @@ __PROFILEX_TRACE 'bashrc: 3) Myshrc loaded.'
 
 # {{{ Configs historial behavior.
 
-export HISTCONTROL="ignorespace"
+export HISTCONTROL="ignoreboth"
 export HISTFILESIZE=198486
 export HISTIGNORE="ls:ll:la:fg"
-export HISTSIZE=2010
+export HISTSIZE=2011
 export HISTTIMEFORMAT="%F %T "
 
-shopt -s histappend 
+shopt -s histappend
 
 # }}}
 

@@ -15,8 +15,8 @@
 --------------------------------------------------------------------------------
  BRIEF
 
-`ProfileX' is a powerful and beautiful toolkit for Bourne-compatible shells (sh,
- bash, ...).
+`ProfileX' got-started on 6th May 2010. Is a powerful and beautiful toolkit for
+ Bourne-compatible shells (sh, bash, ...).
 
 Bases on shell profile scripts.
 
@@ -53,6 +53,7 @@ c). Uninstall:
 
 Opposites to the section b, to uninstall it, just using:
 
+    cd ProfileX
     make uninstall
 
 
@@ -109,62 +110,27 @@ Notice: Once there have been any dissatisfied aliases from `ProfileX', you can
 --------------------------------------------------------------------------------
  APPENDIX
 
-a). Improved commands:
+a). Aliases:
 
-  1. in 'lib/myshrc/alias.rc':
+    g     =   git
+    la    =   ls -A
+    ll    =   ls -hl
+    own   =   chown -cRh <USER>:<GROUP>
+    su    =   sudo -s
+    v     =   vi
+    vi    =   vim
 
-    cat     ( -sb )
-    cp      ( -ai )
-    df      ( -Th )
-    du      ( -ch --time )
-    free    ( -m )
-    mkdir   ( -p )
-    more    ( LESS )
-    mv      ( -i )
-    ps      ( -ewwo"user,tty,pid,ppid,state,etime,pcpu,pmem,time,args" )
-    rm      ( -i )
+c). Sommands:
 
-  2. in 'lib/myshrc/color.rc':
-
-    diff    ( COLORDIFF )
-    egrep   ( --color=auto )
-    fgrep   ( --color=auto )
-    grep    ( --color=auto )
-    less    ( SOURCE-HIGHLIGHT )
-    ls      ( -F --color=auto )
-
-b). Replaced/Created aliases:
-
-  1. in 'lib/myshrc/alias.rc':
-
-    g       ( git )
-    ll      ( ls -hl )
-    la      ( ll -A )
-    own     ( chown -cRh USER:GROUP )
-    su      ( sudo -s )
-    v       ( vi )
-    vi      ( vim )
-
-  2. in 'lib/myshrc/color.rc':
-
-    ansicolors
-
-c). Created commands:
-
-  1. in folder 'bin':
-
-    x       - A powerful toolkit to quickly work with your most frequently used
-              directories.
-    xad     - Registers new directory.
-    xcd     - Changes CWD to some directory.
-    xls     - Lists all registered directories.
-    xrm     - Removes some directory.
+    ansicolors   Lists all available ANSI colors.
+    xad          Registers CWD onto an alias.
+    xcd          Changes CWD to some directory.
+    xls          Lists all registered directories.
+    xrm          Removes some directory.
 
 
 --------------------------------------------------------------------------------
  COPYRIGHT
 
 Copyright © 2010-2011 Snakevil Zen <zsnakevil@gmail.com>. RIGHTS RESERVED.
-
-Last-Modified in May 22nd 2011. Getting-Started in May 6th 2010.
 

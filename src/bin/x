@@ -9,8 +9,14 @@
 'which' basename printf dirname cat rm touch expr awk > /dev/null 2>&1 \
   || exit 1
 
-'which' pwd grep tr > /dev/null 2>&1 \
+'which' pwd grep tr uname > /dev/null 2>&1 \
   || exit 1
+
+[ 'Darwin' = `'uname' -s` ] && {
+  ECHO='/bin/echo'
+} || {
+  ECHO="'echo'"
+}
 
 # {{{ Defines common used error messages.
 
@@ -46,8 +52,8 @@ readonly M_ALIAS_REMOVE='Really drop it'
 X_debug() {
   [ -z "${DeBuG}" ] && return 0
 
-  'echo' -n `'awk' -v'times='$X_dbglvl 'BEGIN{OFS=">>";NF=1+times;print}'`
-  'echo' '> '$*
+  $ECHO -n `'awk' -v'times='$X_dbglvl 'BEGIN{OFS=">>";NF=1+times;print}'`
+  $ECHO '> '$*
 }
 
 # }}}
@@ -87,11 +93,11 @@ X_error() {
     [ 0 -eq $code ] && {
       mesg="X: ${mesg}"
       'printf' "${mesg}" $*
-      'echo'
+      $ECHO
     } || {
       mesg="X: ERROR: ${mesg}"
       'printf' "${mesg}" $* >&2
-      'echo' >&2
+      $ECHO >&2
     }
   }
 
@@ -109,7 +115,7 @@ X_read_rc() {
 
   pathlist=`'cat' "${rcfile}" 2> /dev/null`
   [ -z "${pathlist}" ] && pathcnt=0 \
-    || pathcnt=`'echo' "${pathlist}" | 'wc' -l`
+    || pathcnt=`$ECHO "${pathlist}" | 'wc' -l`
 
   X_debug '..Paths <pathlist>: '"${pathlist}"
   X_debug '..Paths amount <pathcnt>: '$pathcnt
@@ -127,7 +133,7 @@ X_write_rc() {
     'rm' -f "${rcfile}"
     'touch' "${rcfile}"
   } || {
-    'echo' "${pathlist}" > "${rcfile}"
+    $ECHO "${pathlist}" > "${rcfile}"
   }
 
   X_debug_out
@@ -151,7 +157,7 @@ X_search() {
 
   X_debug '..Testing alias <>: '"$1"
 
-  pathmatch=`'echo' "${pathlist}" \
+  pathmatch=`$ECHO "${pathlist}" \
     | 'awk' -F"${fldsep}" -v"alias=$1" ' \
       alias==$1 { \
         print $2 \
@@ -168,7 +174,7 @@ X_search() {
 X_confirm() {
   X_debug_in 'X_confirm'
 
-  'echo' -n "$*"
+  $ECHO -n "$*"
 
   local answer
   while [ 1 ]
@@ -219,15 +225,17 @@ X_HELP_TAIL
 Xadd() {
   X_debug_in 'Xadd'
 
-  X_debug '..Length <>: '`'echo' "${majopt}" | 'wc' -c`
+  local length=`$ECHO -n "${majopt}" | 'wc' -c`
 
-  [ 8 -lt `'echo' "${majopt}" | 'wc' -c` ] && {
+  X_debug '..Length <length>: '$length
+
+  [ 8 -lt $length ] && {
     X_debug_out
 
-    X_error 7 "${E_ALIAS_TOOLONG}"
+    X_error 7 "${E_ALIAS_TOOLONG}" $length
   }
 
-  local illchrs=`'echo' -n "${majopt}" | 'tr' -d '[:alnum:]-_'`
+  local illchrs=`$ECHO -n "${majopt}" | 'tr' -d '[:alnum:]-_'`
   X_debug '..Illegal chars <>: '"${illchrs}"
 
   [ -n "${illchrs}" ] && {
@@ -254,9 +262,9 @@ Xadd() {
     X_confirm "${M_ALIAS_OVERWRITE}"
 
     [ 0 -eq $? ] && {
-      pathlist=`'echo' "${pathlist}" \
+      pathlist=`$ECHO "${pathlist}" \
         | 'grep' -v "${majopt}${fldsep}${pathmatch}"; \
-        'echo' "${newitem}"`
+        $ECHO "${newitem}"`
       X_write_rc
 
       X_error 0 "${E_ALIAS_REPLACED}" "${majopt}" "${PWD}"
@@ -268,7 +276,7 @@ Xadd() {
   }
 
   [ 0 -eq $pathcnt ] && pathlist="${newitem}" \
-    || pathlist=`'echo' "${pathlist}"; 'echo' "${newitem}"`
+    || pathlist=`$ECHO "${pathlist}"; $ECHO "${newitem}"`
   X_write_rc
   X_error 0 "${E_ALIAS_ADDED}" "${majopt}"
 
@@ -405,7 +413,7 @@ Xls() {
   }
 
   'printf' "${M_ALIAS_TOTAL}\n" $pathcnt
-  'echo' "${pathlist}" \
+  $ECHO "${pathlist}" \
     | 'awk' -F"${fldsep}" ' \
       { \
         printf "% 8s\t", $1; \
@@ -432,7 +440,7 @@ Xquery() {
     X_error 7 "${E_ALIAS_UNKNOWN}" "${majopt}"
   }
 
-  'echo' "${pathmatch}"
+  $ECHO "${pathmatch}"
 
   X_debug_out
 }
@@ -458,7 +466,7 @@ Xrm() {
   X_confirm "${M_ALIAS_REMOVE}"
 
   [ 0 -eq $? ] && {
-    pathlist=`'echo' "${pathlist}" \
+    pathlist=`$ECHO "${pathlist}" \
       | 'grep' -v "${majopt}${fldsep}${pathmatch}"`
     X_write_rc
     X_error 0 "${E_ALIAS_REMOVED}" "${majopt}"

@@ -27,15 +27,21 @@ _x() {
 
   [ "$1" = "$3" ] || return 0
 
-  local list=`'xls' | 'awk' '"Total"!=$1{print $1}'`
+  local list=`'xls' 2> /dev/null | 'awk' '"Total"!=$1{print $1}'`
   local cur="$2"
 
-  COMPREPLY=( $( compgen -W "${list}" -- "${cur}" ) )
+  [ "xcd" = "$1" -o "xrm" = "$1" ] && {
+    [ '-' = "${cur:0:1}" ] || {
+      COMPREPLY=( $( compgen -W "${list}" -- "${cur}" ) )
+      return 0
+    }
+  }
 
+  COMPREPLY=( $( compgen -W '--help' -- "${cur}" ) )
   return 0
 }
 
-complete -F _x xad xcd xrm
+complete -F _x x xad xcd xls xrm
 
 # }}}
 

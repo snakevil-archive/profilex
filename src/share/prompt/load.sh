@@ -11,15 +11,15 @@
   'which' expr > /dev/null && {
     'expr' "${_PROFILEX_LOAD}" \> 0.1 > /dev/null && {
       'expr' "${_PROFILEX_LOAD}" \> 1 > /dev/null && {
-        _PROFILEX_LOAD="${CMaroon}${_PROFILEX_LOAD}"
+        _PROFILEX_LOAD="${CMaroon}${CUnder}${_PROFILEX_LOAD}"
       } || {
-        _PROFILEX_LOAD="${COlive}${_PROFILEX_LOAD}"
+        _PROFILEX_LOAD="${COlive}${CUnder}${_PROFILEX_LOAD}"
       }
     } || {
-      _PROFILEX_LOAD="${CGreen}${_PROFILEX_LOAD}"
+      _PROFILEX_LOAD="${CGreen}${CUnder}${_PROFILEX_LOAD}"
     }
   } || {
-    _PROFILEX_LOAD="${CSilver}${_PROFILEX_LOAD}"
+    _PROFILEX_LOAD="${CSilver}${CUnder}${_PROFILEX_LOAD}"
   }
   _PROFILEX_LOAD=" L${_PROFILEX_LOAD}"
 }

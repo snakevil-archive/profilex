@@ -10,7 +10,7 @@
   then
     _PROFILEX_JOBS=''
   else
-    _PROFILEX_JOBS=" J${CSilver}${_PROFILEX_JOBS}"
+    _PROFILEX_JOBS=" J${CSilver}${CUnder}${_PROFILEX_JOBS}"
   fi
 }
 

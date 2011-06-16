@@ -36,6 +36,10 @@ alias rm='rm -i'
 
 'which' git > /dev/null && alias g='git'
 
+'which' hg > /dev/null && alias h='hg'
+
+'which' svn > /dev/null && alias s='svn'
+
 'which' sudo > /dev/null && alias su='sudo -s'
 
 'which' vim > /dev/null && alias vi='vim'

@@ -5,8 +5,13 @@
 
 'which' hg > /dev/null && {
   _PROFILEX_HG_BRANCH=`'hg' branch 2> /dev/null`
-  [ -z "${_PROFILEX_HG_BRANCH}" ] && return 0
+  [ -z "${_PROFILEX_HG_BRANCH}" ] && {
+    unalias hcd &> /dev/null
+    return 0
+  }
   _PROFILEX_HG_ROOT=`'hg' root 2> /dev/null`
+  alias hcd="[ '${PWD}' = '${_PROFILEX_HG_ROOT}' ] \
+    || cd '${_PROFILEX_HG_ROOT}'"
   _PROFILEX_HG_BRANCH="|h${CBlue}${_PROFILEX_HG_BRANCH}"
 }
 

@@ -6,8 +6,13 @@
 'which' git awk > /dev/null && {
   _PROFILEX_GIT_BRANCH=`'git' symbolic-ref HEAD 2> /dev/null \
     | 'awk' -F'/' '{print $3}'`
-  [ -z "${_PROFILEX_GIT_BRANCH}" ] && return 0
+  [ -z "${_PROFILEX_GIT_BRANCH}" ] && {
+    unalias gcd &> /dev/null
+    return 0
+  }
   _PROFILEX_GIT_ROOT=`'git' rev-parse --show-toplevel 2> /dev/null`
+  alias gcd="[ '${PWD}' = '${_PROFILEX_GIT_ROOT}' ] \
+    || cd '${_PROFILEX_GIT_ROOT}'"
   _PROFILEX_GIT_BRANCH="|g${CBlue}${_PROFILEX_GIT_BRANCH}"
 }
 

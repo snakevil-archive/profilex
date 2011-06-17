@@ -10,8 +10,12 @@
     return 0
   }
   _PROFILEX_HG_ROOT=`'hg' root 2> /dev/null`
-  alias hcd="[ '${PWD}' = '${_PROFILEX_HG_ROOT}' ] \
-    || cd '${_PROFILEX_HG_ROOT}'"
+  if [ "${_PROFILEX_HG_ROOT}" = "${PWD}" ]
+  then
+    unalias hcd &> /dev/null
+  else
+    alias hcd="cd '${_PROFILEX_HG_ROOT}'"
+  fi
   _PROFILEX_HG_BRANCH="|h${CBlue}${_PROFILEX_HG_BRANCH}"
 }
 

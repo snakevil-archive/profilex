@@ -11,8 +11,12 @@
     return 0
   }
   _PROFILEX_GIT_ROOT=`'git' rev-parse --show-toplevel 2> /dev/null`
-  alias gcd="[ '${PWD}' = '${_PROFILEX_GIT_ROOT}' ] \
-    || cd '${_PROFILEX_GIT_ROOT}'"
+  if [ "${_PROFILEX_GIT_ROOT}" = "${PWD}" ];
+  then
+    unalias gcd &> /dev/null
+  else
+    alias gcd="cd '${_PROFILEX_GIT_ROOT}'"
+  fi
   _PROFILEX_GIT_BRANCH="|g${CBlue}${_PROFILEX_GIT_BRANCH}"
 }
 

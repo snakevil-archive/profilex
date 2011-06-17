@@ -32,6 +32,8 @@ readonly E_ALIAS_TOOLONG="${E_ALIAS_TOOLONG} given!"
 readonly E_ALIAS_INVALIAD="Sorry... Only 'a-z0-9_' and '-' can be used."
 readonly E_PATH_UNREGISTERED="CWD has not been registered yet."
 readonly E_PATH_REGISTERED="CWD has been registered as '%s'."
+E_PATH_HOME="You can just use 'cd' to turn back to your HOME"
+readonly E_PATH_HOME="${E_PATH_HOME} folder."
 
 # }}}
 
@@ -245,6 +247,12 @@ X_HELP_TAIL
 
 Xadd() {
   X_debug_in 'Xadd'
+
+  [ "${PWD}" = "${HOME}" ] && {
+    X_debug_out
+
+    X_error 10 "${E_PATH_HOME}"
+  }
 
   local length=`$ECHO -n "${majopt}" | 'wc' -c`
 

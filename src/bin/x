@@ -12,11 +12,7 @@
 'which' pwd grep tr uname > /dev/null 2>&1 \
   || exit 1
 
-[ 'Darwin' = `'uname' -s` ] && {
-  ECHO='/bin/echo'
-} || {
-  ECHO="'echo'"
-}
+ECHO='/bin/echo'
 
 # {{{ Defines common used error messages.
 
@@ -592,7 +588,7 @@ case `'basename' $0` in
     ;;
 esac
 majopt="$1"
-shift
+[ -n "${majopt}" ] && shift
 
 X_debug '..Original <subcmd>: '$subcmd
 X_debug '..Original <majopt>: '"${majopt}"

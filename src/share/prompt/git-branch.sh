@@ -7,6 +7,7 @@
   _PROFILEX_GIT_BRANCH=`'git' symbolic-ref HEAD 2> /dev/null \
     | 'awk' -F'/' '{print $3}'`
   [ -z "${_PROFILEX_GIT_BRANCH}" ] && return 0
+  _PROFILEX_GIT_ROOT=`'git' rev-parse --show-toplevel 2> /dev/null`
   _PROFILEX_GIT_BRANCH="|g${CBlue}${_PROFILEX_GIT_BRANCH}"
 }
 

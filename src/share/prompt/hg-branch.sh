@@ -6,6 +6,7 @@
 'which' hg > /dev/null && {
   _PROFILEX_HG_BRANCH=`'hg' branch 2> /dev/null`
   [ -z "${_PROFILEX_HG_BRANCH}" ] && return 0
+  _PROFILEX_HG_ROOT=`'hg' root 2> /dev/null`
   _PROFILEX_HG_BRANCH="|h${CBlue}${_PROFILEX_HG_BRANCH}"
 }
 

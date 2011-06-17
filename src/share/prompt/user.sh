@@ -4,7 +4,7 @@
 # COPYRIGHT  © 2011 Snakevil.in.
 
 _PROFILEX_USER="${CTeal}${USER}"
-[ 0 -eq $UID ] && {
+[ 'x0' = "x${UID}" ] && {
   _PROFILEX_USER="${CMaroon}${USER}"
   [ -z "${SUDO_USER}" ] || {
     _PROFILEX_USER="${CMaroon}root${CBase}(${SUDO_USER})"

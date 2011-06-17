@@ -81,6 +81,7 @@ __PROFILEX_PROMPT() {
     | 'sed' -e 's/\(\\\e\[[0-9;]*m\)/\\\[\1\\\]/g'`
   export PS1
   unset prompt
+  _PROFILEX_pwd="${PWD}"
 }
 export PROMPT_COMMAND='__PROFILEX_PROMPT'
 

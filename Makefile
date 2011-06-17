@@ -58,6 +58,9 @@ ProfileX:
 # {{{ Rule on target: install
 
 install: ProfileX
+	$(if $(shell [ 0 -eq `'id' -u` -a '/root' != '$(HOME)' ] && 'echo' 1), \
+		$(error Install denied in SUDO mode) \
+	)
 	if [ ! -d "$(BACKUP_MKDIR)" ]; \
 	then \
 		'mkdir' -p "$(BACKUP_MKDIR)"; \

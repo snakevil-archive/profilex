@@ -34,7 +34,7 @@ esac
           ORS = "/"; \
         } \
         2 < NR && '"${depth}"' - 1 > NR { \
-          print CH, substr($0, 0, 1), CN; \
+          print CH, substr($0, 1, 1), CN; \
           next; \
         } \
         { \

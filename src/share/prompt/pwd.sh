@@ -41,7 +41,7 @@ esac
           print; \
         }'`
     unset depth
-    eval '_PROFILEX_PWD="'"${_PROFILEX_PWD:0:-1}"'"'
+    eval '_PROFILEX_PWD="'"${_PROFILEX_PWD:0:${#_PROFILEX_PWD}-1}"'"'
   }
 
   _PROFILEX_PWD="${COlive}/${_PROFILEX_PWD}"

@@ -1,0 +1,36 @@
+# ~/.local/ProfileX/lib/myshrc/motd.rc
+#
+# AUTHOR     Snakevil Zen <zsnakevil@gmail.com>
+# COPYRIGHT  © 2011 Snakevil.in.
+
+profilex() {
+  'which' awk stat sed dirname less &> /dev/null || return 1
+  local readme=`'stat' -c'%N' "${_PROFILEX}" \
+    | 'awk' 'BEGIN{FS="'"'"' -> \`"}{print $2}' \
+    | 'sed' -e's/'"'"'//'`
+  readme=`'dirname' "${readme}"`
+  readme="${readme}/README"
+  [ -f "${readme}" ] || return 2
+  less "${readme}"
+}
+
+[ -f "${_PROFILEXRC}/motd" -a -r "${_PROFILEXRC}/motd" ] && \
+  'cat' "${_PROFILEXRC}/motd" || 'cat' << PROFILEX_ASCII_ART
+
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMNy+-.   \`-+hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMdo-\`  \`-sMMMMMMN. h
+MMm/ \`/ydm++ds. /MMMMMMMMMMMMMMMMMMMN+/MMMMMMMMMMo/NMMMMMMMm: .odNNh. /MMMm+\` /N
+My \`sMMMN- +MMm  dMMMMMMMMMMMMMMMMMN- oMMMMy+dMM/ /MMMMMMMm\` oMMMMMMm  dh: \`+mMM
+N  yMMMN- /MMM+ .s :NMMMMMMmmMMMNNm: /NNMMN//dM+ :MMMNdmMMs .MMMMMMMM/   -yMMMMM
+N\` sMMM: :ms+\` /s \`\` -MMd: .\`\`sN-.   ...+d\`\`NMo :MN+.\`-sMMm\` +NMMMMm+\`  yMMMMMMM
+Md- -M: :Mh/+ymMNyy- +My \`hMs -MM/ \` /MMd\`\`dMo -NM+ :ooMMMMmsoNMMh: \`o: +MMMMMMM
+MMMNN/ -NMMMMMMMy. /mMm\` sMm. sM+ :m  Nm\`\`dMs -NNs. -+hNyomMMMNs. -yMMd \`NMMMMMM
+MMMM+ -NMMMMMMMN  :o/. \` -+\`\`sMo :Mh \`M/ ./\`  ::   oo/- -oNMMy\` /dMMMMM: oMMMMMM
+MMMMyoNMMMMMMMMMdsooydMMyoohNMo -Nm\` yMmsosddooymdoooydMMMMMy \`dMMMMMMMmohMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMy .mo\`\`yMMMMMMMMMMMMMMMMMMMMMMMh/hMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMh\`  -oNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMSantaMFeMLETMonMMacMOSMX
+PROFILEX_ASCII_ART
+
+# vim:ft=sh:fenc=utf-8:ff=unix:tw=75:ts=2:sts=2:et:ai:si
+# vim:nowrap:sw=2:nu:nuw=4:so=5:fen:fdm=marker

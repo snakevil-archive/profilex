@@ -12,7 +12,9 @@
 'which' pwd grep tr uname > /dev/null 2>&1 \
   || exit 1
 
-ECHO='/bin/echo'
+readonly ECHO='/bin/echo'
+
+X_dbglvl=0
 
 # {{{ Defines common used error messages.
 

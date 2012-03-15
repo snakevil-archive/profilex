@@ -39,7 +39,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMSantaMFeMLETMonMMacMOSMX
 
 “ProfileX”直接以 git 库的形式发布，您可以这样获取源代码：
 
-    git clone git://snakevil.in/profilex ProfileX
+    git clone https://github.com/snakevil/profilex.git ProfileX
 
 二、安装
 

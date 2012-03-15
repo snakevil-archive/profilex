@@ -40,7 +40,7 @@ a). Get the source code:
 `ProfileX' is exposed on the internet via git, you can retrieve the source code
  using:
 
-    git clone git://snakevil.in/profilex ProfileX
+    git clone https://github.com/snakevil/profilex.git ProfileX
 
 b). Install:
 

@@ -22,7 +22,7 @@ alias grep='grep --color=auto'
 
 export PAGER="less -M -N"
 
-alias man='PAGER="less -Mn" man'
+alias man='PAGER="less -M" man'
 
 LESSOPENx="/share/source-highlight/src-hilite-lesspipe.sh"
 if [ -x "/usr${LESSOPENx}" ]; then

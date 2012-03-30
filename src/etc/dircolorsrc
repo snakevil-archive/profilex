@@ -23,6 +23,7 @@ TERM screen-w
 TERM vt100
 TERM xterm
 TERM xterm-color
+TERM xterm-256color
 
 NORMAL  00 # Default
 FILE    00 # Regular files

@@ -70,7 +70,7 @@ __PROFILEX_PROMPT() {
   eval "title=\"${title}\""
   title=`'echo' "${title}" \
     | 'sed' -e 's/\\\e\[[0-9;]*m//g'`
-  'echo' -ne "\e]0;${title}\a"
+  'tty' | 'grep' pty || 'echo' -ne "\e]0;${title}\a"
   unset title
   path="${_PROFILEXRC}/prompt.ps1"
   [ -r "${path}" ] || path="${_PROFILEX}/etc/prompt.ps1"
